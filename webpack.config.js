@@ -55,7 +55,7 @@ module.exports = {
   stats: {
     hash: false,
     errors: true,
-    warnings: false,
+    warnings: true,
     colors: true,
     outputPath: false,
     publicPath: false,

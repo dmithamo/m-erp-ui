@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
 
-const Homepage = () => (
+const LandingPage = () => (
   <Fragment>
     <h4>Welcome to the MHC Requisitions App.</h4>
-    <p>[Work in progress]</p>
+    <p>[WIP]</p>
   </Fragment>
 );
 
-export default Homepage;
+export default LandingPage;
