@@ -1,5 +1,6 @@
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 
 module.exports = {
   mode: 'production',
@@ -11,9 +12,12 @@ module.exports = {
     publicPath: '/',
   },
   optimization: {
-    splitChunks: {
-      chunks: 'all',
-    },
+    minimizer: [
+      new UglifyJsPlugin({
+        chunkFilter: chunk => chunk.name === 'vendor',
+        parallel: true,
+      }),
+    ],
   },
   module: {
     rules: [
@@ -46,7 +50,7 @@ module.exports = {
   performance: {
     hints: 'warning',
   },
-  devtool: 'source-map',
+  devtool: 'eval-source-map',
   target: 'web',
   stats: {
     hash: false,
