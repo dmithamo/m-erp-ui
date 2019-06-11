@@ -5,7 +5,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-// Components
-import Homepage from './components/_Homepage';
+// Main Component (Routes)
+import Routes from './components/_Routes';
 
-ReactDOM.render(<Homepage />, document.getElementById('app'));
+ReactDOM.render(<Routes />, document.getElementById('app'));
