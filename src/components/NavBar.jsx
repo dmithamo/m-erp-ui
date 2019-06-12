@@ -1,10 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import mhcLogo from '../assets/mhc-logo-nav.png';
 
 const NavBar = () => (
   <StyledNavBar>
-    <StyledLink to="/">Mamlaka Logo</StyledLink>
+    <StyledLink to="/">
+      <Logo src={mhcLogo} alt="mamlaka-hill-chapel-logo" />
+    </StyledLink>
     <div>
       <StyledLink to="/signin">Sign in</StyledLink>
       <StyledLink isCTA to="/signup">
@@ -13,13 +16,19 @@ const NavBar = () => (
     </div>
   </StyledNavBar>
 );
+const Logo = styled.img`
+  width: 90px;
+  height: auto;
+  padding: 0.2rem;
+`;
 
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: white;
   text-align: center;
+  font-size: 12px;
   background-color: ${props => (props.isCTA ? 'green' : 'black')};
-  padding: ${props => props.isCTA && '0.9rem'};
+  padding: ${props => props.isCTA && '0.6rem'};
   width: ${props => props.isCTA && '35%'};
   border-radius: ${props => props.isCTA && '0.3rem'};
   :hover,
@@ -36,6 +45,8 @@ const StyledNavBar = styled.nav`
   padding: 1.5em 0;
   align-items: center;
   color: white;
+  height: 60px;
+  box-sizing: border-box;
   div {
     width: 17%;
     display: flex;

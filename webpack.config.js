@@ -50,7 +50,7 @@ module.exports = {
   performance: {
     hints: 'warning',
   },
-  devtool: 'eval-source-map',
+  devtool: 'inline-source-map',
   target: 'web',
   stats: {
     hash: false,

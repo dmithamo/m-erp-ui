@@ -30,6 +30,10 @@
         "caseSensitive": false
       }
     ],
-    "react/prop-types": [0]
+    "react/prop-types": [0],
+    "no-restricted-globals": [0],
+    "no-confusing-arrow": [0],
+    "implicit-arrow-linebreak": [0],
+    "function-paren-newline": [0]
   }
 }
