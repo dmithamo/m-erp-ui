@@ -3,45 +3,53 @@
  * and provide appropriate props for SignUp
  * -- use signUpInputs
  */
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { ArrowRightAlt, CancelOutlined } from '@material-ui/icons';
 import AuthForm from './common/AuthForm';
 import { signUpInputs } from './common/_Constants';
 
-export const SignUpForm = () => (
+const SignUpForm = () => {
+  const [currentPage, setcurrentPage] = useState(1);
+  return currentPage === 1 ? (
+    <SignUpFormOne setPage={setcurrentPage} />
+  ) : (
+    <SignUpFormTwo setPage={setcurrentPage} />
+  );
+};
+
+const SignUpFormOne = ({ setPage }) => (
   <AuthForm
     inputs={signUpInputs.filter(input => !input.isSelect)}
-    buttonParams={{
-      buttonText: (
-        <StyledLink color to="/signup/2">
-          Save and Proceed
-        </StyledLink>
-      ),
-      buttonOnClick: () => {
-        // Proper fn will be defined to validate input, etc
-      },
-    }}
     formHeader="Sign up to get started"
     formFooter="Did you already sign up?"
     link={{ to: '/signin', linkText: 'Sign in instead' }}
+    primaryBtnParams={{
+      primaryBtnText: 'Save and Proceed',
+      primaryBtnOnClick: () => setPage(2),
+    }}
+    secondaryBtnParams={{
+      secondaryBtnText: <CancelOutlined />,
+      secondaryBtnOnClick: () => location.replace('/'),
+    }}
   />
 );
 
-export const SignUpFormTwo = () => (
+const SignUpFormTwo = ({ setPage }) => (
   <AuthForm
     inputs={signUpInputs.filter(input => input.isSelect)}
-    buttonParams={{
-      buttonText: 'Sign up',
-      buttonOnClick: () => {
-        // Proper fn will be defined to validate input, etc
-        // eslint-disable-next-line no-alert
-        alert('[WIP]');
-      },
-    }}
     formHeader="Sign up to get started"
     formFooter="Did you already sign up?"
     link={{ to: '/signin', linkText: 'Sign in instead' }}
+    primaryBtnParams={{
+      primaryBtnText: 'Sign up',
+      primaryBtnOnClick: () => null,
+    }}
+    secondaryBtnParams={{
+      secondaryBtnText: <ArrowRightAlt />,
+      secondaryBtnOnClick: () => setPage(1),
+    }}
   >
     <StyledDiv>
       <p>
@@ -63,10 +71,12 @@ const StyledLink = styled(Link)`
   text-decoration: none;
 `;
 
-export const StyledDiv = styled.div`
+const StyledDiv = styled.div`
   margin-top: 1.5rem;
   width: 70%;
   text-align: center;
   color: rgba(0, 0, 0, 0.5);
   font-size: 0.6rem;
 `;
+
+export default SignUpForm;

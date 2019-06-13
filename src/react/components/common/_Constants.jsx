@@ -16,29 +16,28 @@ import {
 
 export const signUpInputs = [
   {
+    id: 'firstname',
     type: 'text',
     icon: <PersonPinOutlined />,
     placeholder: 'First name',
   },
   {
+    id: 'lastname',
     type: 'text',
     icon: <PersonPinOutlined />,
     placeholder: 'Last name',
   },
   {
+    id: 'email',
     type: 'email',
     icon: <AlternateEmailOutlined />,
-    placeholder: 'Email address',
+    placeholder: 'MHC-issued Email address',
   },
   {
+    id: 'password',
     type: 'password',
     icon: <FingerprintOutlined />,
-    placeholder: 'Password',
-  },
-  {
-    type: 'password',
-    icon: <FingerprintOutlined />,
-    placeholder: 'Re-type password',
+    placeholder: 'Set a Password',
   },
   {
     isSelect: true,
@@ -81,11 +80,13 @@ export const signUpInputs = [
 
 export const loginInputs = [
   {
+    id: 'email',
     type: 'email',
     icon: <AlternateEmailOutlined />,
     placeholder: 'Email address',
   },
   {
+    id: 'password',
     type: 'password',
     icon: <FingerprintOutlined />,
     placeholder: 'Password',
