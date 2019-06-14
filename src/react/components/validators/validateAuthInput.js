@@ -81,7 +81,8 @@ const validateEmail = email => {
   if (email) {
     // RegExp for valid MHC Email
     // TODO: Confirm email pattern
-    const mhcEmailRegEx = new RegExp('\\w+.\\w+@mamlakahillchapel.org');
+    // const mhcEmailRegEx = new RegExp('\\w+.\\w+@mamlakahillchapel.org');
+    const mhcEmailRegEx = new RegExp('\\w+@temp.org');
     const isInvalidMHCEmail = !mhcEmailRegEx.test(email);
 
     isInvalidMHCEmail &&

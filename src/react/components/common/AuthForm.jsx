@@ -5,10 +5,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import mhcLogo from '../../assets/mhc-logo-small.jpg';
 import Input from './Input';
 import Select from './Select';
 import { PrimaryBtn, SecondaryBtn } from './Button';
+
+import store from '../../../redux/store';
 
 const AuthForm = ({
   inputs,
@@ -21,6 +25,8 @@ const AuthForm = ({
 }) => {
   const { primaryBtnText, primaryBtnOnClick } = primaryBtnParams;
   const { secondaryBtnText, secondaryBtnOnClick } = secondaryBtnParams;
+
+  const { validationErrors } = store.getState();
 
   return (
     <StyledFormContainer>
@@ -48,7 +54,7 @@ const AuthForm = ({
       {children}
 
       <PrimaryBtn
-        errors={[]}
+        errors={validationErrors}
         primaryBtnText={primaryBtnText}
         primaryBtnOnClick={primaryBtnOnClick}
       />
@@ -98,4 +104,10 @@ const FormFooter = styled.p`
   font-weight: 500;
   margin-bottom: 2rem;
 `;
-export default AuthForm;
+
+// Reduxing!
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators({}, dispatch),
+});
+
+export default connect(mapDispatchToProps)(AuthForm);

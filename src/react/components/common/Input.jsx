@@ -1,67 +1,55 @@
 import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import styled from 'styled-components';
 import { ErrorOutline } from '@material-ui/icons';
-import { validateAuthInput } from '../validators/validateAuthInput';
+
+// Redux things
+import store from '../../../redux/store';
+import {
+  clearValidationErrors,
+  collectUserInput,
+} from '../../../redux/actions/authActions';
 
 class Input extends Component {
-  constructor(props) {
-    super(props);
-    // Extract the id from props for use in state
-    // as key for value in an input
-    const { id } = props;
-    this.state = {
-      errors: [],
-      [id]: '',
-    };
-  }
-
   /**
-   * @description Run checks onBlur to ensure valid user input
-   * Store the errors in state
-   * @param {DOMObject} input - the DOM Element whose
-   *  input value we are validating
+   * @description Remove errors from store onFocus
+   * for a given input element
    * @returns {void}
    */
-  validateInput(input) {
-    const errors = validateAuthInput(input);
-    this.setState({ errors });
-  }
-
-  /**
-   * @description Remove errors from state onFocus
-   * for a given input
-   * @returns {void}
-   */
-  clearErrors() {
-    this.setState({ errors: [] });
+  clearErrors(input) {
+    const { id: inputID } = input;
+    store.dispatch(clearValidationErrors(inputID));
   }
 
   /**
    * @description Collect user input onChange
-   * Store the value in state
+   * Store the value in global store
    * @param {DOMObject} input - the DOM Element whose
    *  input value we are collecting
    * @returns {void}
    */
   collectInputValue(input) {
-    const { id, value } = input;
-    this.setState({ [id]: value });
+    store.dispatch(collectUserInput(input));
   }
 
   render() {
     const { id, type, icon, placeholder } = this.props;
 
-    const { errors } = this.state;
-    const { id: value } = this.state;
+    let { validationErrors } = store.getState();
+    validationErrors = validationErrors.filter(err => err.errorID === id);
+
+    const { userAttrs } = store.getState();
+    const value = userAttrs[id];
 
     return (
       <Fragment>
-        <StyledInputContainer errors={errors}>
-          <p>{errors.length <= 0 ? icon : <StyledErrorOutline />}</p>
+        <StyledInputContainer errors={validationErrors}>
+          <p>{validationErrors.length <= 0 ? icon : <StyledErrorOutline />}</p>
           <StyledInput
             autoComplete="off"
             id={id}
-            onFocus={() => this.clearErrors()}
+            onFocus={e => this.clearErrors(e.target)}
             onBlur={e => this.validateInput(e.target)}
             placeholder={placeholder}
             type={type}
@@ -71,7 +59,7 @@ class Input extends Component {
         </StyledInputContainer>
         <ErrorsContainer>
           <Fragment>
-            {errors.map(error => (
+            {validationErrors.map(error => (
               <p>{error.errorMessage}</p>
             ))}
           </Fragment>
@@ -135,4 +123,9 @@ const StyledErrorOutline = styled(ErrorOutline)`
   color: red;
 `;
 
-export default Input;
+// Reduxing!
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators({}, dispatch),
+});
+
+export default connect(mapDispatchToProps)(Input);

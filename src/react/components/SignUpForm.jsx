@@ -3,23 +3,68 @@
  * and provide appropriate props for SignUp
  * -- use signUpInputs
  */
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { ArrowRightAlt, CancelOutlined } from '@material-ui/icons';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import AuthForm from './common/AuthForm';
+import store from '../../redux/store';
+import { addValidationErrors } from '../../redux/actions/authActions';
 import { signUpInputs } from './common/_Constants';
+import { validateAuthInput } from './validators/validateAuthInput';
 
-const SignUpForm = () => {
-  const [currentPage, setcurrentPage] = useState(1);
-  return currentPage === 1 ? (
-    <SignUpFormOne setPage={setcurrentPage} />
-  ) : (
-    <SignUpFormTwo setPage={setcurrentPage} />
-  );
-};
+class SignUpForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentPage: 1,
+    };
+  }
 
-const SignUpFormOne = ({ setPage }) => (
+  /**
+   * @description Determine which page of the sign up form to show
+   * @param {Number} pageNumber - page of Sign up form to show
+   * @returns {void}
+   */
+  setPageNumber(pageNumber) {
+    this.setState({ currentPage: pageNumber });
+  }
+
+  /**
+   *@description Validate form data on submit. Write errors to global store
+   * @memberof SignUpForm
+   * @returns {void}
+   */
+  validateDataOnFormSubmit() {
+    const { userAttrs } = store.getState();
+    const inputNames = Object.keys(userAttrs);
+    inputNames
+      .map(name => ({ id: name, value: userAttrs[name] }))
+      .map(inputObject => {
+        store.dispatch(addValidationErrors(validateAuthInput(inputObject)));
+      });
+  }
+
+  render() {
+    const { currentPage } = this.state;
+
+    return currentPage === 1 ? (
+      <SignUpFormOne
+        onSubmit={this.validateDataOnFormSubmit}
+        setPage={() => this.setPageNumber(2)}
+      />
+    ) : (
+      <SignUpFormTwo
+        onSubmit={this.validateDataOnFormSubmit}
+        setPage={() => this.setPageNumber(1)}
+      />
+    );
+  }
+}
+
+const SignUpFormOne = ({ onSubmit }) => (
   <AuthForm
     inputs={signUpInputs.filter(input => !input.isSelect)}
     formHeader="Sign up to get started"
@@ -27,7 +72,7 @@ const SignUpFormOne = ({ setPage }) => (
     link={{ to: '/signin', linkText: 'Sign in instead' }}
     primaryBtnParams={{
       primaryBtnText: 'Save and Proceed',
-      primaryBtnOnClick: () => setPage(2),
+      primaryBtnOnClick: onSubmit,
     }}
     secondaryBtnParams={{
       secondaryBtnText: <CancelOutlined />,
@@ -36,7 +81,7 @@ const SignUpFormOne = ({ setPage }) => (
   />
 );
 
-const SignUpFormTwo = ({ setPage }) => (
+const SignUpFormTwo = ({ setPage, onSubmit }) => (
   <AuthForm
     inputs={signUpInputs.filter(input => input.isSelect)}
     formHeader="Sign up to get started"
@@ -44,7 +89,7 @@ const SignUpFormTwo = ({ setPage }) => (
     link={{ to: '/signin', linkText: 'Sign in instead' }}
     primaryBtnParams={{
       primaryBtnText: 'Sign up',
-      primaryBtnOnClick: () => null,
+      primaryBtnOnClick: onSubmit,
     }}
     secondaryBtnParams={{
       secondaryBtnText: <ArrowRightAlt />,
@@ -79,4 +124,9 @@ const StyledDiv = styled.div`
   font-size: 0.6rem;
 `;
 
-export default SignUpForm;
+// Reduxing!
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators({}, dispatch),
+});
+
+export default connect(mapDispatchToProps)(SignUpForm);
