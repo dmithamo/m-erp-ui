@@ -1,15 +1,12 @@
 import { createStore } from 'redux';
 import { registerUserReducer } from './reducers/authReducers';
 
+// Initialize store
 const initialStore = {
-  userAttrs: {
-    firstname: '',
-    lastname: '',
-    email: '',
-    password: '',
-  },
-  validationErrors: [],
+  users: [],
+  authenticatedUser: {},
 };
+
 const store = createStore(
   registerUserReducer,
   initialStore,

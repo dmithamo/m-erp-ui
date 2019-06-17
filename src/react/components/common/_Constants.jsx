@@ -41,7 +41,7 @@ export const signUpInputs = [
   },
   {
     isSelect: true,
-    id: 'user-campus',
+    id: 'campus-select',
     icon: <PersonPinCircleOutlined />,
     options: [
       { value: '', name: 'Select your Campus' },
@@ -51,7 +51,7 @@ export const signUpInputs = [
   },
   {
     isSelect: true,
-    id: 'user-department',
+    id: 'department-select',
     icon: <CategoryOutlined />,
     options: [
       { value: '', name: 'Select your Department' },
@@ -65,7 +65,7 @@ export const signUpInputs = [
   },
   {
     isSelect: true,
-    id: 'user-role',
+    id: 'role-select',
     icon: <PeopleOutline />,
     options: [
       { value: '', name: 'Select your Role' },

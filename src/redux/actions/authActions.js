@@ -5,45 +5,45 @@
  *
  * PS: Action types are defined right alongside
  * the action creators.
- * Beacuse my choice
  */
 
-const ADD_VALIDATION_ERRORS = 'ADD_VALIDATION_ERRORS';
-export const addValidationErrors = errors => {
-  return {
-    type: ADD_VALIDATION_ERRORS,
-    payload: errors,
-  };
-};
+import store from '../store';
 
-const CLEAR_VALIDATION_ERRORS = 'CLEAR_VALIDATION_ERRORS';
-export const clearValidationErrors = inputID => {
-  return {
-    type: CLEAR_VALIDATION_ERRORS,
-    payload: inputID,
-  };
-};
+import { REGISTER_USER, LOGIN_USER } from './authActionTypes';
 
-const COLLECT_USER_INPUT = 'COLLECT_USER_INPUT';
-export const collectUserInput = input => {
-  return {
-    type: COLLECT_USER_INPUT,
-    payload: input,
-  };
-};
-
-const REGISTER_USER = 'REGISTER_USER';
-export const registerUser = user => {
+/**
+ * @description Create the action needed for writing user
+ * to the store on successful validation
+ * @param {object} user new user to be written in the store
+ * @returns {object} registerUserAction action
+ */
+const createRegisterUserAction = user => {
   return {
     type: REGISTER_USER,
     payload: user,
   };
 };
 
-// Export all action types in one object
-export const authActionTypes = {
-  ADD_VALIDATION_ERRORS,
-  CLEAR_VALIDATION_ERRORS,
-  COLLECT_USER_INPUT,
-  REGISTER_USER,
+/**
+ * @description Write user to the store on successful validation
+ * @param {object} user new user to be written in the store
+ * @returns {void}
+ */
+export const registerUser = user => {
+  store.dispatch(createRegisterUserAction(user));
+};
+
+/**
+ * @description Create the action needed for loging in a user
+ * @param {object} user user to be logged in
+ * @returns {object} loginUserAction action
+ */
+const createLoginUserAction = user => {
+  return {
+    type: LOGIN_USER,
+    payload: user,
+  };
+};
+export const loginUser = user => {
+  store.dispatch(createLoginUserAction(user));
 };

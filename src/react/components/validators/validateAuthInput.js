@@ -1,3 +1,5 @@
+import store from '../../../redux/store';
+
 /**
  * @description Set up a switch as the primary gateway to input
  * validation
@@ -90,6 +92,13 @@ const validateEmail = email => {
         errorID: 'email',
         errorMessage: `${email} is not a valid MHC email address`,
       });
+
+    const isNotUnique = !checkUniqueness(email);
+    isNotUnique &&
+      emailErrors.push({
+        errorID: 'email',
+        errorMessage: `${email} is already in use`,
+      });
   } else {
     emailErrors.push({
       errorID: 'email',
@@ -98,6 +107,16 @@ const validateEmail = email => {
   }
 
   return emailErrors;
+};
+
+/**
+ * @description Check whether email is unique
+ * @param {string} email
+ */
+const checkUniqueness = email => {
+  const { users } = store.getState();
+  const isUnique = users.filter(user => user.email === email).length === 0;
+  return isUnique;
 };
 
 /**
@@ -146,7 +165,7 @@ const validatePassword = password => {
  * @param {DOMObject} select - select element whose value is to be validated
  * @returns {array} selectErrors - an array of errors of the
  * shape:
- * [{errorID: [selecID], errorMessage: 'A descriptive message for each error}]
+ * [{errorID: [selectID], errorMessage: 'A descriptive message for each error}]
  */
 export const validateAuthSelect = select => {
   const { id, value } = select;

@@ -5,7 +5,7 @@ import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 module.exports = {
   mode: 'production',
   context: path.resolve(__dirname, './src'),
-  entry: './index.jsx',
+  entry: ['babel-polyfill', './index.jsx'],
   output: {
     path: path.resolve(__dirname, './build'),
     filename: '[name].bundle.js',

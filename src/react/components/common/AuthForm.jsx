@@ -12,8 +12,6 @@ import Input from './Input';
 import Select from './Select';
 import { PrimaryBtn, SecondaryBtn } from './Button';
 
-import store from '../../../redux/store';
-
 const AuthForm = ({
   inputs,
   primaryBtnParams,
@@ -22,11 +20,13 @@ const AuthForm = ({
   formFooter,
   link,
   children,
+  userAttrs,
+  onChange,
+  onFocus,
+  validationErrors,
 }) => {
   const { primaryBtnText, primaryBtnOnClick } = primaryBtnParams;
   const { secondaryBtnText, secondaryBtnOnClick } = secondaryBtnParams;
-
-  const { validationErrors } = store.getState();
 
   return (
     <StyledFormContainer>
@@ -40,13 +40,25 @@ const AuthForm = ({
       {/* Render sign up inputs here */}
       {inputs.map(input =>
         input.isSelect ? (
-          <Select id={input.id} icon={input.icon} options={input.options} />
+          <Select
+            id={input.id}
+            icon={input.icon}
+            options={input.options}
+            onChange={onChange}
+            onFocus={onFocus}
+            userAttrs={userAttrs}
+            validationErrors={validationErrors}
+          />
         ) : (
           <Input
             id={input.id}
             type={input.type}
             icon={input.icon}
             placeholder={input.placeholder}
+            onChange={onChange}
+            onFocus={onFocus}
+            userAttrs={userAttrs}
+            validationErrors={validationErrors}
           />
         ),
       )}
@@ -72,10 +84,10 @@ const StyledFormContainer = styled.div`
   box-shadow: 0 1px 2px 2px rgb(193, 193, 193);
   border-radius: 5px;
   background-color: white;
-  width: 33%;
+  width: 35%;
   font-size: 12px;
   text-align: center;
-  margin-top: 3rem;
+  margin-top: 1rem;
 
   display: flex;
   flex-direction: column;
@@ -88,7 +100,7 @@ const Logo = styled.img`
 `;
 
 const FormHeader = styled.p`
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   font-weight: 700;
 `;
 

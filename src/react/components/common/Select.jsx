@@ -1,86 +1,46 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import styled from 'styled-components';
 import { ErrorOutline } from '@material-ui/icons';
-import { validateAuthSelect } from '../validators/validateAuthInput';
 
-class Select extends Component {
-  constructor(props) {
-    super(props);
-    // Extract the id from props for use in state
-    // as key for value in an Select
-    const { id } = props;
-    this.state = {
-      errors: [],
-      [id]: '',
-    };
-  }
+const Select = ({
+  id,
+  icon,
+  options,
+  userAttrs,
+  onChange,
+  validationErrors,
+  onFocus,
+}) => {
+  const valErrors = validationErrors.filter(err => err.errorID === id);
+  const value = userAttrs[id];
 
-  /**
-   * @description Run checks onBlur to ensure valid user input
-   * Store the errors in state
-   * @param {DOMObject} select - the DOM Element whose
-   *  Select value we are validating
-   * @returns {void}
-   */
-  validateSelect(select) {
-    const errors = validateAuthSelect(select);
-    this.setState({ errors });
-  }
-
-  /**
-   * @description Remove errors from state onFocus
-   * for a given Select
-   * @returns {void}
-   */
-  clearErrors() {
-    this.setState({ errors: [] });
-  }
-
-  /**
-   * @description Collect user Select onChange
-   * Store the value in state
-   * @param {DOMObject} select - the DOM Element whose
-   *  Select value we are collecting
-   * @returns {void}
-   */
-  collectSelectValue(select) {
-    const { id, value } = select;
-    this.setState({ [id]: value });
-  }
-
-  render() {
-    const { id, icon, options } = this.props;
-
-    const { errors } = this.state;
-    const { id: value } = this.state;
-
-    return (
-      <Fragment>
-        <StyledSelectContainer errors={errors}>
-          <p>{errors.length <= 0 ? icon : <StyledErrorOutline />}</p>
-          <StyledSelect
-            id={id}
-            onFocus={() => this.clearErrors()}
-            onBlur={e => this.validateSelect(e.target)}
-            onChange={e => this.collectSelectValue(e.target)}
-            value={value}
-          >
-            {options.map(option => (
-              <option value={option.value}>{option.name}</option>
-            ))}
-          </StyledSelect>
-        </StyledSelectContainer>
-        <ErrorsContainer>
-          <Fragment>
-            {errors.map(error => (
-              <p>{error.errorMessage}</p>
-            ))}
-          </Fragment>
-        </ErrorsContainer>
-      </Fragment>
-    );
-  }
-}
+  return (
+    <Fragment>
+      <StyledSelectContainer errors={valErrors}>
+        <p>{valErrors.length <= 0 ? icon : <StyledErrorOutline />}</p>
+        <StyledSelect
+          id={id}
+          onFocus={e => onFocus(e.target)}
+          onChange={e => onChange(e.target)}
+          value={value}
+        >
+          {options.map(option => (
+            <option value={option.value}>{option.name}</option>
+          ))}
+        </StyledSelect>
+      </StyledSelectContainer>
+      <ErrorsContainer>
+        <Fragment>
+          {valErrors.map(error => (
+            <p>{error.errorMessage}</p>
+          ))}
+        </Fragment>
+      </ErrorsContainer>
+    </Fragment>
+  );
+};
 
 const StyledSelect = styled.select`
   box-sizing: border-box;
@@ -121,12 +81,19 @@ const ErrorsContainer = styled.div`
   color: red;
   font-size: 10px;
   margin-top: 0;
+  margin-bottom: 1rem;
   text-align: left;
   width: 80%;
+  height: 0.7rem;
 `;
 
 const StyledErrorOutline = styled(ErrorOutline)`
   color: red;
 `;
 
-export default Select;
+// Reduxing!
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators({}, dispatch),
+});
+
+export default connect(mapDispatchToProps)(Select);

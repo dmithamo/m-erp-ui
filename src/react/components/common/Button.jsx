@@ -14,6 +14,9 @@ export const SecondaryBtn = ({ secondaryBtnText, secondaryBtnOnClick }) => (
 );
 
 const StyledBtn = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: rgb(0, 193, 0);
   width: 50%;
   outline: none;
@@ -23,7 +26,7 @@ const StyledBtn = styled.button`
   font-family: 'Fira Mono', monospace;
   font-size: 14px;
   height: 40px;
-  margin: 2rem 0;
+  margin: 1rem 0;
   :disabled {
     opacity: 0.3;
     cursor: not-allowed;
