@@ -12,15 +12,19 @@ This repo tracks the build process for the front-end for the above named applica
 2. Execute the following commands in terminal
 
 ```bash
+git checkout develop
 yarn # to install the dependencies
 yarn start:dev # to start the development server.
+
+# Feel free to substitute yarn for npm
 ```
 
-If all went well, the app should be available at `http://localhost:5000`
+If all went well, the app should be available at [http://localhost:5000](http://localhost:5000)
 
 ### Technologies
 
-1. Node JS
-2. Webpack - for bundling files
-3. Babel - for transpling ES6/ES7 into ES5, for compatibility with more browsers
-4. Yarn - a Node package manager comparable to `npm`
+1. React
+2. Redux
+3. Webpack - for bundling files
+4. Babel - for transpling ES6/ES7 into ES5, for compatibility with more browsers
+5. Yarn - a Node package manager comparable to `npm`

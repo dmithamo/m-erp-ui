@@ -1,3 +1,4 @@
+import { hot } from 'react-hot-loader/root';
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
@@ -24,7 +25,10 @@ const Routes = () => (
 );
 
 const RouteContainer = styled.section`
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 `;
 
-export default Routes;
+export default hot(Routes);

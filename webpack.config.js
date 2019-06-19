@@ -5,7 +5,7 @@ import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 module.exports = {
   mode: 'production',
   context: path.resolve(__dirname, './src'),
-  entry: './index.js',
+  entry: ['babel-polyfill', './index.jsx'],
   output: {
     path: path.resolve(__dirname, './build'),
     filename: '[name].bundle.js',
@@ -50,7 +50,7 @@ module.exports = {
   performance: {
     hints: 'warning',
   },
-  devtool: 'eval-source-map',
+  devtool: 'inline-source-map',
   target: 'web',
   stats: {
     hash: false,
