@@ -1,21 +1,38 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import store from '../../redux/store';
 import mhcLogo from '../assets/mhc-logo-nav.png';
+import AuthenticatedUser from './AuthenticatedUser';
 
-const NavBar = () => (
-  <StyledNavBar>
-    <StyledLink to="/">
-      <Logo src={mhcLogo} alt="mamlaka-hill-chapel-logo" />
-    </StyledLink>
-    <div>
-      <StyledLink to="/signin">Sign in</StyledLink>
-      <StyledLink isCTA to="/signup">
-        Sign up
+const NavBar = () => {
+  // Extract authenticatedUser from store if any exists
+  const { authenticatedUser } = store.getState();
+
+  return (
+    <StyledNavBar>
+      <StyledLink to="/">
+        <Logo src={mhcLogo} alt="mamlaka-hill-chapel-logo" />
       </StyledLink>
-    </div>
-  </StyledNavBar>
+      {authenticatedUser.hasOwnProperty('firstname') ? (
+        <AuthenticatedUser user={authenticatedUser} />
+      ) : (
+        <AuthButtons />
+      )}
+    </StyledNavBar>
+  );
+};
+
+const AuthButtons = () => (
+  <div>
+    <StyledLink to="/signin">Sign in</StyledLink>
+    <StyledLink isCTA to="/signup">
+      Sign up
+    </StyledLink>
+  </div>
 );
+
 const Logo = styled.img`
   width: 90px;
   height: auto;
@@ -48,10 +65,18 @@ const StyledNavBar = styled.nav`
   height: 60px;
   box-sizing: border-box;
   div {
+    padding: 0.5em;
     width: 17%;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    box-sizing: border-box;
   }
 `;
-export default NavBar;
+
+// Reduxing!
+const mapStateToProps = state => ({
+  authenticatedUser: state.authenticatedUser,
+});
+
+export default connect(mapStateToProps)(NavBar);

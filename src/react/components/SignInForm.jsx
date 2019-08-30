@@ -10,16 +10,19 @@ import store from '../../redux/store';
 import AuthForm from './common/AuthForm';
 import { loginInputs } from './common/_Constants';
 
+// Global constants
+const ORIGINAL_STATE = {
+  userAttrs: {
+    email: '',
+    password: '',
+  },
+  validationErrors: [],
+};
+
 class SignInForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      userAttrs: {
-        email: '',
-        password: '',
-      },
-      validationErrors: [],
-    };
+    this.state = { ...ORIGINAL_STATE };
 
     this.collectUserInput = this.collectUserInput.bind(this);
     this.loginUserOnSubmit = this.loginUserOnSubmit.bind(this);
@@ -65,7 +68,10 @@ class SignInForm extends Component {
         ...prevState,
         validationErrors: [
           ...prevState.validationErrors,
-          { errorID: 'email', errorMessage: 'No user with that email exists' },
+          {
+            errorID: 'email',
+            errorMessage: 'No user with that email exists',
+          },
         ],
       }));
       return; // doing this to avoid else statements. Don't like em
@@ -79,7 +85,10 @@ class SignInForm extends Component {
         ...prevState,
         validationErrors: [
           ...prevState.validationErrors,
-          { errorID: 'password', errorMessage: 'Wrong password' },
+          {
+            errorID: 'password',
+            errorMessage: 'Wrong password',
+          },
         ],
       }));
       return;
@@ -87,13 +96,12 @@ class SignInForm extends Component {
 
     // Login user and reset form
     loginUser(registeredUser);
-    this.setState({
-      userAttrs: {
-        email: '',
-        password: '',
-      },
-      validationErrors: [],
-    });
+
+    // redirect to home page
+    const { history } = this.props;
+    history.push('/');
+
+    this.setState({ ...ORIGINAL_STATE });
   }
 
   render() {
