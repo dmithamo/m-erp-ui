@@ -47,6 +47,7 @@
     "no-underscore-dangle": [0],
     "react/jsx-wrap-multilines": [0],
     "class-methods-use-this": [0],
-    "array-callback-return": [0]
+    "array-callback-return": [0],
+    "no-prototype-builtins": [0]
   }
 }

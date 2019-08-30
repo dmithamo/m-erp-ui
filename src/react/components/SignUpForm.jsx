@@ -16,22 +16,24 @@ import {
   validateAuthSelect,
 } from './validators/validateAuthInput';
 
+// Global constants
+const ORIGINAL_STATE = {
+  currentPage: 1,
+  userAttrs: {
+    firstname: '',
+    lastname: '',
+    email: '',
+    password: '',
+    'campus-select': '',
+    'department-select': '',
+    'role-select': '',
+  },
+  validationErrors: [],
+};
 class SignUpForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      currentPage: 1,
-      userAttrs: {
-        firstname: '',
-        lastname: '',
-        email: '',
-        password: '',
-        'campus-select': '',
-        'department-select': '',
-        'role-select': '',
-      },
-      validationErrors: [],
-    };
+    this.state = { ...ORIGINAL_STATE };
 
     this.collectUserInput = this.collectUserInput.bind(this);
     this.validateDataOnFormSubmit = this.validateDataOnFormSubmit.bind(this);
@@ -133,20 +135,12 @@ class SignUpForm extends Component {
 
     registerUser(userAttrs);
 
+    // redirect to home page
+    const { history } = this.props;
+    history.push('/');
+
     // Clear inputs
-    this.setState({
-      currentPage: 1,
-      userAttrs: {
-        firstname: '',
-        lastname: '',
-        email: '',
-        password: '',
-        'campus-select': '',
-        'department-select': '',
-        'role-select': '',
-      },
-      validationErrors: [],
-    });
+    this.setState({ ...ORIGINAL_STATE });
   }
 
   /**
