@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-
+import { ArrowDropDown } from '@material-ui/icons';
 import defaultAvatar from '../assets/default-avatar.png';
+import DropDownMenu from './DropDownMenu';
 
 const AuthenticatedUser = props => {
+  const [showMenu, setShowMenu] = useState(false);
+  const onClick = () => {
+    setShowMenu(!showMenu);
+  };
+
   const {
     user: { firstname, lastname, role },
   } = props;
@@ -15,14 +21,25 @@ const AuthenticatedUser = props => {
         {`${firstname} ${lastname}`}
         <p>{role}</p>
       </StyledName>
+      <DropDownButton onClick={onClick} />
+      {showMenu && <DropDownMenu />}
     </StyledUserContainer>
   );
 };
+
+const DropDownButton = props => {
+  const { onClick } = props;
+  return (
+    <StyledDropDown>
+      <ArrowDropDown onClick={onClick} />
+    </StyledDropDown>
+  );
+};
+
 const StyledAvatar = styled.img`
   width: auto;
   height: 50px;
   border-radius: 50%;
-  border: 1px solid white;
 `;
 
 const StyledName = styled.p`
@@ -40,6 +57,12 @@ const StyledName = styled.p`
     font-weight: normal;
     text-transform: uppercase;
   }
+`;
+
+const StyledDropDown = styled.p`
+  text-align: right;
+  cursor: pointer;
+  transform: ${props => props.showMenu && 'rotate(90deg)'};
 `;
 
 const StyledUserContainer = styled.div`

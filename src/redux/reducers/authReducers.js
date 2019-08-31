@@ -6,7 +6,11 @@
  * execution
  */
 
-import { REGISTER_USER, LOGIN_USER } from '../actions/authActionTypes';
+import {
+  REGISTER_USER,
+  LOGIN_USER,
+  LOGOUT_USER,
+} from '../actions/authActionTypes';
 
 const initialState = {};
 
@@ -25,6 +29,12 @@ export const registerUserReducer = (state = initialState, action) => {
       return {
         ...state,
         authenticatedUser: { ...payload, loggedIn: true },
+      };
+    case LOGOUT_USER:
+      // SLogout the user saved in the store
+      return {
+        ...state,
+        authenticatedUser: {},
       };
 
     default:
