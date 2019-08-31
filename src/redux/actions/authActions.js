@@ -9,7 +9,7 @@
 
 import store from '../store';
 
-import { REGISTER_USER, LOGIN_USER } from './authActionTypes';
+import { REGISTER_USER, LOGIN_USER, LOGOUT_USER } from './authActionTypes';
 
 /**
  * @description Create the action needed for writing user
@@ -46,4 +46,17 @@ const createLoginUserAction = user => {
 };
 export const loginUser = user => {
   store.dispatch(createLoginUserAction(user));
+};
+
+/**
+ * @description Create the action needed for loging out a user
+ * @returns {object} loginUserAction action
+ */
+const createLogoutUserAction = () => {
+  return {
+    type: LOGOUT_USER,
+  };
+};
+export const logoutUser = () => {
+  store.dispatch(createLogoutUserAction());
 };
