@@ -19,11 +19,11 @@ describe('onSubmitHelper', () => {
     };
   });
 
-  test('onSubmitHelper does not call auth fns for invalid credentials', () => {
+  test('onSubmitHelper calls onError fn for invalid params', () => {
     onSubmitHelper(e, {}, auth);
 
     expect(auth.onLoginSuccess).toHaveBeenCalledTimes(0);
-    expect(auth.onError).toHaveBeenCalledTimes(0);
+    expect(auth.onError).toHaveBeenCalledTimes(1);
   });
 
   test('onSubmitHelper calls auth.onError for bad credentials', () => {

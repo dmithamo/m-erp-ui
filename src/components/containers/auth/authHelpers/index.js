@@ -3,7 +3,7 @@
  * the auth form as props.
  * */
 import { isValidEmail, isValidPassword } from '../../../../utils/validateInput';
-import { ERROR_RESPONSES } from '../../../../constants/standardMessages';
+import generateErrorMessage from '../../../../constants/messages';
 import RestClient from '../../../../services';
 
 /**
@@ -22,13 +22,31 @@ export function onSubmitHelper(e, formValues, auth) {
    * Render error maybe?
    */
   if (!formValues || !formValues.email || !formValues.password) {
+    handleErrorHelper(
+      {
+        status: 400,
+        message: generateErrorMessage('auth', 'MISSING_REQUIRED_PARAM'),
+      },
+      auth,
+    );
     return;
   }
 
   try {
-    isValidEmail(formValues.email) && isValidPassword(formValues.password)
-      ? loginUserHelper(formValues, auth)
-      : handleErrorHelper(ERROR_RESPONSES.invalidCredentials, auth);
+    if (
+      isValidEmail(formValues.email) &&
+      isValidPassword(formValues.password)
+    ) {
+      loginUserHelper(formValues, auth);
+      return;
+    }
+    handleErrorHelper(
+      {
+        status: 400,
+        message: generateErrorMessage('auth', 'INVALID_CREDENTIALS'),
+      },
+      auth,
+    );
   } catch (error) {
     handleErrorHelper(error, auth);
   }
@@ -55,14 +73,17 @@ async function loginUserHelper(user, auth) {
     if (res && res.response.status && res.response.status === 401) {
       handleErrorHelper(
         {
-          ...ERROR_RESPONSES.genericError,
-          message: res.response.message,
+          status: 401,
+          message: generateErrorMessage('auth', res.response.message),
         },
         auth,
       );
     }
   } catch (error) {
-    handleErrorHelper(error, auth);
+    handleErrorHelper(
+      { ...error, message: generateErrorMessage('auth', 'UNEXPECTED_ERR') },
+      auth,
+    );
   }
 }
 

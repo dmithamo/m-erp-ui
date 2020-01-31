@@ -5,12 +5,12 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { LogoSmall } from '../../common/Logo';
+import { LogoSmall } from '../../presentation/Logo';
 import { FormContainer, FormHeader } from './styles/authFormStyles';
-import Input from '../../common/Input';
-import Button from '../../common/Button';
-import { InlineError } from '../../common/Error';
-import { CopyrightWarning } from '../../common/CopyrightWarning';
+import Input from '../../presentation/Input';
+import Button from '../../presentation/Button';
+import { InlineError } from '../../presentation/Error';
+import { CopyrightWarning } from '../../presentation/CopyrightWarning';
 import { useAuthContext } from '../../../context/auth';
 import { onSubmitHelper, onChangeHelper } from './authHelpers';
 

@@ -5,8 +5,8 @@ import {
   SECURED_RESOURCES,
   UNSECURED_RESOURCES,
 } from '../../constants/resources';
-import Loader from '../common/Loader';
-import FourOhFour from '../common/404';
+import Loader from '../presentation/Loader';
+import FourOhFour from '../presentation/404';
 import { useAuthContext, isAllowedAccess } from '../../context/auth';
 
 /**
