@@ -29,6 +29,7 @@ const DropDownMenu = (props) => {
 
       <Button onClick={onClose}>
         <CloseOutlined fontSize="inherit" />
+        <span>Close</span>
       </Button>
     </Container>
   );
@@ -61,9 +62,11 @@ const Button = styled.button`
   cursor: pointer;
   background: none;
   :hover {
-    background-color: #e3e3e3;
-    color: black;
-    border: 1px solid #00000010;
+    text-decoration: underline;
+  }
+
+  span {
+    margin-left: 1.2em;
   }
 `;
 

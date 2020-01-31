@@ -3,7 +3,10 @@ import { mount } from 'enzyme';
 import { InlineError } from '../Error';
 
 test('renders an error component with error msg passed in props', () => {
-  const props = { error: { message: 'Wrong password or something' } };
+  const props = {
+    error: { message: 'INVALID_CREDENTIALS' },
+    category: 'auth',
+  };
   const wrapper = mount(<InlineError {...props} />);
 
   expect(
@@ -11,5 +14,5 @@ test('renders an error component with error msg passed in props', () => {
       .find('span')
       .first()
       .text(),
-  ).toEqual(props.error.message);
+  ).toEqual('Wrong email or password');
 });

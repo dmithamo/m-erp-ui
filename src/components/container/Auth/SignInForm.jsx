@@ -5,14 +5,14 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { LogoSmall } from '../../presentation/Logo';
+import { LogoSmall } from '../../presentational/Logo';
 import { FormContainer, FormHeader } from './styles/authFormStyles';
-import Input from '../../presentation/Input';
-import Button from '../../presentation/Button';
-import { InlineError } from '../../presentation/Error';
-import { CopyrightWarning } from '../../presentation/CopyrightWarning';
+import Input from '../../presentational/Input';
+import Button from '../../presentational/Button';
+import { InlineError } from '../../presentational/Error';
+import { CopyrightWarning } from '../../presentational/CopyrightWarning';
 import { useAuthContext } from '../../../context/auth';
-import { onSubmitHelper, onChangeHelper } from './authHelpers';
+import { onSubmitListener, onChangeEventListener } from './eventListeners';
 
 export default function LoginForm(props) {
   const auth = useAuthContext();
@@ -30,7 +30,11 @@ export default function LoginForm(props) {
       <LogoSmall />
 
       <FormHeader>
-        {error ? <InlineError error={error} /> : 'Sign in to continue'}
+        {error ? (
+          <InlineError category="auth" error={error} />
+        ) : (
+          'Sign in to continue'
+        )}
       </FormHeader>
 
       <form
@@ -44,6 +48,7 @@ export default function LoginForm(props) {
           name="email"
           placeholder="Enter email address"
           value={email}
+          error={!!error && error.message.split('_')[3] === 'EMAIL'}
         />
 
         <Input
@@ -53,6 +58,7 @@ export default function LoginForm(props) {
           name="password"
           placeholder="Enter password"
           value={password}
+          error={!!error && error.message.split('_')[3] === 'PASSWORD'}
         />
 
         <Button
@@ -75,6 +81,6 @@ LoginForm.propTypes = {
 };
 
 LoginForm.defaultProps = {
-  handleFormSubmit: onSubmitHelper,
-  handleFormInput: onChangeHelper,
+  handleFormSubmit: onSubmitListener,
+  handleFormInput: onChangeEventListener,
 };

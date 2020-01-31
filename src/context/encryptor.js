@@ -10,6 +10,7 @@ const SECRET_KEY = process.env.REACT_APP_SECRET_KEY;
  * @param {object} value
  */
 export function encryptValue(value) {
+  if (!value) return;
   try {
     /*
      * Remove the exp property to prevent
@@ -33,6 +34,7 @@ export function encryptValue(value) {
  * @param {string} value
  */
 export function decryptValue(value) {
+  if (!value) return;
   try {
     return jwt.verify(value, SECRET_KEY);
   } catch (error) {

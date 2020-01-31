@@ -6,9 +6,9 @@ import {
 import {
   fullPageLayout,
   dashboardLayout,
-} from '../components/containers/layouts';
-import SignInForm from '../components/containers/auth/SignInForm';
-import Dashboard from '../components/containers/Dashboard';
+} from '../components/container/Layouts';
+import SignInForm from '../components/container/Auth/SignInForm';
+import Dashboard from '../components/container/Dashboard';
 
 export const SECURED_RESOURCES = {
   dashboard: {

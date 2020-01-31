@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import { mount } from 'enzyme';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthContextProvider } from '../../../context/auth';
-import LoginForm from '../auth/SignInForm';
+import LoginForm from '../Auth/SignInForm';
 
 describe('<SignInForm /> : not authenticated', () => {
   let wrapper;
@@ -64,7 +64,7 @@ describe('<SignInForm /> : errored', () => {
   const authState = {
     error: {
       status: 401,
-      message: 'Unauthorized. Bad credentials',
+      message: 'INVALID_CREDENTIALS',
     },
   };
   beforeEach(() => {
@@ -77,7 +77,7 @@ describe('<SignInForm /> : errored', () => {
 
   test('it renders an error when there is one in the auth context', () => {
     const { getByText, getByAltText, queryByText } = wrapper;
-    expect(getByText(authState.error.message)).toBeInTheDocument();
+    expect(getByText('Wrong email or password')).toBeInTheDocument();
     expect(getByAltText(/logo/i)).toBeInTheDocument();
     expect(getByText(/this software is licensed/i)).toBeInTheDocument();
     expect(queryByText(/sign in to continue/i)).not.toBeInTheDocument();

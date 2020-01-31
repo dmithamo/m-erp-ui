@@ -2,9 +2,20 @@
  * Define all auth hooks here and pass them to
  * the auth form as props.
  * */
-import { isValidEmail, isValidPassword } from '../../../../utils/validateInput';
-import generateErrorMessage from '../../../../constants/messages';
-import RestClient from '../../../../services';
+import { isValidEmail, isValidPassword } from '../../../utils/validateInput';
+import RestClient from '../../../services';
+
+/**
+ * @description handle changes in the form inputs
+ * @param {object} e
+ * @param {object} formValues
+ * @param {object} setFormValues
+ * @param {object} auth
+ */
+export function onChangeEventListener(e, formValues, setFormValues, auth) {
+  setFormValues({ ...formValues, [e.target.name]: e.target.value });
+  auth.authState.error && auth.onError(null);
+}
 
 /**
  * @description Validate formValues then:
@@ -15,41 +26,56 @@ import RestClient from '../../../../services';
  * @param {object} formValues values of email, password inputs
  * @param {object} auth the auth context object
  */
-export function onSubmitHelper(e, formValues, auth) {
+export function onSubmitListener(e, formValues, auth) {
   e.preventDefault();
 
-  /*
-   * Render error maybe?
-   */
-  if (!formValues || !formValues.email || !formValues.password) {
-    handleErrorHelper(
-      {
-        status: 400,
-        message: generateErrorMessage('auth', 'MISSING_REQUIRED_PARAM'),
-      },
-      auth,
-    );
-    return;
-  }
+  if (hasMissingParam(formValues, ['password', 'email'], auth)) return;
 
   try {
     if (
       isValidEmail(formValues.email) &&
       isValidPassword(formValues.password)
     ) {
+      // For valid params
       loginUserHelper(formValues, auth);
       return;
     }
+
+    // For invalid params...
     handleErrorHelper(
       {
-        status: 400,
-        message: generateErrorMessage('auth', 'INVALID_CREDENTIALS'),
+        status: 401,
+        message: 'INVALID_CREDENTIALS',
       },
       auth,
     );
   } catch (error) {
+    // For an unexpected err
     handleErrorHelper(error, auth);
   }
+}
+
+/**
+ * @description Check that form has all required params
+ * @param {object} form
+ * @param {object} authCtxt
+ */
+function hasMissingParam(form, required, authCtxt) {
+  let hasMissing = false;
+  required.forEach((value) => {
+    if (!form[value]) {
+      handleErrorHelper(
+        {
+          status: 400,
+          message: `MISSING_REQUIRED_PARAM_${value.toUpperCase()}`,
+        },
+        authCtxt,
+      );
+      hasMissing = true;
+    }
+  });
+
+  return hasMissing;
 }
 
 /**
@@ -74,16 +100,13 @@ async function loginUserHelper(user, auth) {
       handleErrorHelper(
         {
           status: 401,
-          message: generateErrorMessage('auth', res.response.message),
+          message: res.response.message,
         },
         auth,
       );
     }
   } catch (error) {
-    handleErrorHelper(
-      { ...error, message: generateErrorMessage('auth', 'UNEXPECTED_ERR') },
-      auth,
-    );
+    handleErrorHelper({ ...error, message: 'UNEXPECTED_ERR' }, auth);
   }
 }
 
@@ -94,16 +117,4 @@ async function loginUserHelper(user, auth) {
  */
 function handleErrorHelper(error, auth) {
   auth.onError(error);
-}
-
-/**
- * @description handle changes in the form inputs
- * @param {object} e
- * @param {object} formValues
- * @param {object} setFormValues
- * @param {object} auth
- */
-export function onChangeHelper(e, formValues, setFormValues, auth) {
-  setFormValues({ ...formValues, [e.target.name]: e.target.value });
-  auth.authState.error && auth.onError(null);
 }

@@ -3,12 +3,12 @@ const GENERIC_ERROR_RESPONSES = {
     'en-uk': 'An unexpected [server] error happened',
   },
 
-  UNEXPECTED_ERR: {
-    'en-uk': 'An unexpected error happened',
+  MISSING_REQUIRED_PARAM: {
+    'en-uk': 'Missing a required parameter. Check below',
   },
 
-  MISSING_REQUIRED_PARAM: {
-    'en-uk': 'Missing a required field',
+  UNEXPECTED_ERR: {
+    'en-uk': 'An unexpected error happened',
   },
 };
 
@@ -17,6 +17,13 @@ const AUTH_ERR_MESSAGES = {
     'en-uk': 'Wrong email or password',
   },
 
+  MISSING_REQUIRED_PARAM_EMAIL: {
+    'en-uk': 'Email is required',
+  },
+
+  MISSING_REQUIRED_PARAM_PASSWORD: {
+    'en-uk': 'Password is required',
+  },
   /* Insert generic err messages */
   ...GENERIC_ERROR_RESPONSES,
 };

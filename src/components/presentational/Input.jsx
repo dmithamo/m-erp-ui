@@ -23,12 +23,12 @@ export default function Input(props) {
     setPasswordVisible(!passwordVisible);
   }
 
-  const { required, onChange, type, name, placeholder, value } = props;
+  const { required, onChange, type, name, placeholder, value, error } = props;
   const icon = ICONS[name];
 
   return (
     <>
-      <InputContainer>
+      <InputContainer error={error}>
         <IconContainer>{icon}</IconContainer>
 
         <StyledInput
@@ -68,6 +68,7 @@ Input.propTypes = {
   type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
+  error: PropTypes.any.isRequired,
   required: PropTypes.bool.isRequired,
 };
 
@@ -91,7 +92,10 @@ const IconContainer = styled.p`
 const InputContainer = styled.div`
   box-sizing: border-box;
   border-radius: 3px;
-  border: 1px solid rgba(220, 220, 220, 0.8);
+  border: ${(props) =>
+    props.error
+      ? '1px solid rgba(255, 0, 0, 0.8)'
+      : '1px solid rgba(220, 220, 220, 0.8)'};
   width: 100%;
   display: flex;
   justify-content: space-between;
