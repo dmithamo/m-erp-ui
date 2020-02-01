@@ -42,6 +42,7 @@ export default function LoginForm(props) {
         onSubmit={(e) => handleFormSubmit(e, formValues, auth)}
       >
         <Input
+          icon="at"
           required
           onChange={(e) => handleFormInput(e, formValues, setFormValues, auth)}
           type="email"
@@ -52,6 +53,7 @@ export default function LoginForm(props) {
         />
 
         <Input
+          icon="fingerprint"
           required
           onChange={(e) => handleFormInput(e, formValues, setFormValues, auth)}
           type="password"

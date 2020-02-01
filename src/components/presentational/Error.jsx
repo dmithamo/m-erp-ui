@@ -1,6 +1,6 @@
 import React from 'react';
-import { ErrorOutlineOutlined } from '@material-ui/icons';
 import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import generateErrorMessage from '../../constants/messages';
 
@@ -10,7 +10,7 @@ import generateErrorMessage from '../../constants/messages';
 export function InlineError({ error, category }) {
   return (
     <InlineErrorContainer>
-      <ErrorOutlineOutlined />
+      <FontAwesomeIcon icon="exclamation-circle" />
       {generateErrorMessage(category, error.message)}
     </InlineErrorContainer>
   );

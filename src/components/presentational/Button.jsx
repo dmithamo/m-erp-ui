@@ -28,7 +28,7 @@ const StyledBtn = styled.button`
   border-radius: 3px;
   color: white;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 1em;
   height: 42px;
   margin: 1rem 0;
   padding: 0.75em;

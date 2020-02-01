@@ -9,6 +9,7 @@ test('renders an input which accepts input', () => {
     name: 'email',
     value: '',
     required: true,
+    icon: '',
   };
 
   const { getByLabelText } = render(<Input {...props} />);

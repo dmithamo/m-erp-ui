@@ -1,20 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import {
-  EmailOutlined,
-  FingerprintOutlined,
-  VisibilityOutlined,
-  VisibilityOffOutlined,
-} from '@material-ui/icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function Input(props) {
   const [passwordVisible, setPasswordVisible] = useState(false);
-
-  const ICONS = {
-    email: <EmailOutlined />,
-    password: <FingerprintOutlined />,
-  };
 
   /**
    * @description Toggle password visibility on or off
@@ -23,13 +13,25 @@ export default function Input(props) {
     setPasswordVisible(!passwordVisible);
   }
 
-  const { required, onChange, type, name, placeholder, value, error } = props;
-  const icon = ICONS[name];
+  const {
+    icon,
+    required,
+    onChange,
+    type,
+    name,
+    placeholder,
+    value,
+    error,
+  } = props;
 
   return (
     <>
+      <StyledLabel htmlFor={name}>{name}</StyledLabel>
+
       <InputContainer error={error}>
-        <IconContainer>{icon}</IconContainer>
+        <IconContainer>
+          <FontAwesomeIcon icon={icon} />
+        </IconContainer>
 
         <StyledInput
           required={required}
@@ -49,15 +51,14 @@ export default function Input(props) {
               onClick={togglePasswordVisibility}
             >
               {passwordVisible ? (
-                <VisibilityOutlined />
+                <FontAwesomeIcon icon="eye" />
               ) : (
-                <VisibilityOffOutlined />
+                <FontAwesomeIcon icon="eye-slash" />
               )}
             </TogglePasswordVisibilityBtn>
           </IconContainer>
         ) : null}
       </InputContainer>
-      <StyledLabel htmlFor={name}>{name}</StyledLabel>
     </>
   );
 }
@@ -70,6 +71,7 @@ Input.propTypes = {
   value: PropTypes.string.isRequired,
   error: PropTypes.any.isRequired,
   required: PropTypes.bool.isRequired,
+  icon: PropTypes.any.isRequired,
 };
 
 /*
@@ -102,7 +104,7 @@ const InputContainer = styled.div`
   align-items: center;
   padding: 0.75em;
 
-  margin-top: 0.5rem;
+  margin-bottom: 2.5em;
 
   p {
     background-color: white;
@@ -124,7 +126,7 @@ const StyledInput = styled.input`
   width: 100%;
   padding: 0.5rem;
   font-family: inherit;
-  font-size: 12px;
+  font-size: 1em;
   text-transform: ${(props) => props.type === 'email' && 'lowercase'};
   ::placeholder {
     text-transform: capitalize;
@@ -140,8 +142,6 @@ const StyledLabel = styled.label`
   display: flex;
   justify-content: flex-start;
   font-size: 0.9em;
-  font-weight: bold;
-  padding: 0.7em;
 `;
 
 const TogglePasswordVisibilityBtn = styled.button`

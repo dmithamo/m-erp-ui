@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link, useRouteMatch } from 'react-router-dom';
-import { HomeOutlined } from '@material-ui/icons';
 
 const FourOhFour = () => (
   <NotFoundDiv>
@@ -13,7 +13,7 @@ const FourOhFour = () => (
     <br />
 
     <Link to="/">
-      <HomeOutlined />
+      <FontAwesomeIcon icon="home" />
     </Link>
   </NotFoundDiv>
 );

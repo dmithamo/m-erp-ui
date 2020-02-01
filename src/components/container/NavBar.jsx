@@ -40,16 +40,15 @@ NavItem.propTypes = {
 NavItem.defaultProps = { children: null };
 
 const Logo = styled.img`
-  width: 90px;
-  height: auto;
-  padding: 0.2rem;
+  height: 50px;
+  width: auto;
 `;
 
 const StyledLink = styled(NavLink)`
   text-decoration: none;
   color: white;
   text-align: center;
-  font-size: 12px;
+  font-size: 1em;
   :hover {
     font-weight: bold;
   }
@@ -58,18 +57,9 @@ const StyledLink = styled(NavLink)`
 const StyledNavBar = styled.nav`
   display: flex;
   justify-content: space-between;
-  background-color: black;
-  padding: 1.5em 0;
   align-items: center;
+  background-color: black;
   color: white;
-  height: 6vh;
+  padding: 0.2em;
   box-sizing: border-box;
-  div {
-    padding: 0.5em;
-    width: 17%;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    box-sizing: border-box;
-  }
 `;

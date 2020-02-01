@@ -5,7 +5,7 @@ export const FormContainer = styled.div`
   border-radius: 5px;
   background-color: white;
   width: 450px;
-  font-size: 12px;
+  font-size: 1em;
   text-align: center;
 
   display: flex;
@@ -29,7 +29,7 @@ export const FormContainer = styled.div`
 `;
 
 export const FormHeader = styled.p`
-  margin-bottom: 1rem;
+  margin-bottom: 1em;
   color: inherit;
   font-weight: 700;
 `;

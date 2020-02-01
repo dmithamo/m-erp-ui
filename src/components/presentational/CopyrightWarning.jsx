@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import { CopyrightOutlined } from '@material-ui/icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export function CopyrightWarning() {
   return (
     <CopyrightWarningContainer>
       <span>--NOTICE--</span>
       <span>
-        <CopyrightOutlined fontSize="inherit" />
+        <FontAwesomeIcon icon={['far', 'copyright']} />
         &nbsp;
       </span>
       <p id="warning">

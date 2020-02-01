@@ -1,11 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import {
-  CloseOutlined,
-  ExitToAppOutlined,
-  AccountCircleOutlined,
-} from '@material-ui/icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAuthContext } from '../../context/auth';
 
 const DropDownMenu = (props) => {
@@ -18,17 +14,17 @@ const DropDownMenu = (props) => {
   return (
     <Container>
       <Button>
-        <AccountCircleOutlined fontSize="inherit" />
+        <FontAwesomeIcon icon="id-card-alt" />
         <span>Profile</span>
       </Button>
 
       <Button onClick={onSignOut}>
-        <ExitToAppOutlined fontSize="inherit" />
+        <FontAwesomeIcon icon="sign-out-alt" />
         <span>Sign out</span>
       </Button>
 
       <Button onClick={onClose}>
-        <CloseOutlined fontSize="inherit" />
+        <FontAwesomeIcon icon="times-circle" />
         <span>Close</span>
       </Button>
     </Container>
@@ -42,10 +38,11 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-items: space-around;
-  height: 15vh;
   background-color: #f9f9f9;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1000;
+  height: 20vh;
+  width: 200px;
 `;
 
 const Button = styled.button`
@@ -55,14 +52,18 @@ const Button = styled.button`
   font: inherit;
   outline: none;
   border: none;
-  width: 200px;
+  width: 170px;
   font-weight: normal;
   padding: 0.8em;
   margin: auto;
   cursor: pointer;
   background: none;
+  box-sizing: border-box;
+
   :hover {
-    text-decoration: underline;
+    border-radius: 3px;
+    background-color: #e3e3e3;
+    border-left: 3px solid #bfff00;
   }
 
   span {

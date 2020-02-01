@@ -1,9 +1,4 @@
 import {
-  DashboardOutlined as dash,
-  BusinessCenterOutlined as requisitions,
-  ReceiptOutlined as receipts,
-} from '@material-ui/icons';
-import {
   fullPageLayout,
   dashboardLayout,
 } from '../components/container/Layouts';
@@ -16,7 +11,7 @@ export const SECURED_RESOURCES = {
     path: '/dashboard',
     component: Dashboard,
     layout: dashboardLayout,
-    icon: dash,
+    icon: 'tachometer-alt',
     permissions: '::dash',
   },
 
@@ -25,7 +20,7 @@ export const SECURED_RESOURCES = {
     path: '/manage/resources/requisitions',
     component: Dashboard,
     layout: dashboardLayout,
-    icon: requisitions,
+    icon: 'file-invoice',
     permissions: '::requisitions',
   },
 
@@ -34,7 +29,7 @@ export const SECURED_RESOURCES = {
     path: '/manage/resources/receipts',
     component: Dashboard,
     layout: dashboardLayout,
-    icon: receipts,
+    icon: 'receipt',
     permissions: '::receipts',
   },
 };

@@ -6,8 +6,11 @@ import Navbar from '../NavBar';
 export function dashboardLayout({ children }) {
   return (
     <DashboardContainer>
-      <Navbar />
-      {children}
+      <div id="nav-bar">
+        <Navbar />
+      </div>
+
+      <div id="children">{children}</div>
     </DashboardContainer>
   );
 }
@@ -20,11 +23,19 @@ dashboardLayout.propTypes = { children: PropTypes.any.isRequired };
 fullPageLayout.propTypes = { children: PropTypes.any.isRequired };
 
 const DashboardContainer = styled.div`
-  display: grid;
-  grid-template-rows: 1fr 9fr;
   margin: 0;
-  padding: 0;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  div#nav-bar {
+    margin: 0;
+  }
+
+  div#children {
+    margin: 0;
+    flex-grow: 1;
+  }
 `;
 
 const FullPageContainer = styled.div`
