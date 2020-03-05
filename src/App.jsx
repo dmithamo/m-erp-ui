@@ -1,14 +1,36 @@
 import React from 'react';
-import { Provider } from 'react-redux';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import {
+  faFingerprint,
+  faAt,
+  faEye,
+  faEyeSlash,
+  faIdCardAlt,
+  faSignOutAlt,
+  faTimesCircle,
+  faCaretDown,
+  faHome,
+  faExclamationCircle,
+} from '@fortawesome/free-solid-svg-icons';
+import { faCopyright } from '@fortawesome/free-regular-svg-icons';
 import ContextWrappedRouter from './config/ContextWrappedRouter';
-import store from './store/configureStore';
+
+library.add(
+  faFingerprint,
+  faAt,
+  faEye,
+  faEyeSlash,
+  faIdCardAlt,
+  faSignOutAlt,
+  faTimesCircle,
+  faCopyright,
+  faCaretDown,
+  faHome,
+  faExclamationCircle,
+);
 
 function App() {
-  return (
-    <Provider store={store}>
-      <ContextWrappedRouter />
-    </Provider>
-  );
+  return <ContextWrappedRouter />;
 }
 
 export default App;

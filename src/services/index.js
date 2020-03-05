@@ -22,7 +22,7 @@ function loginUserDummy(params) {
         password: '!',
         firstname: 'Lorraine',
         lastname: 'Bundi',
-        role: 'Teens Pastor',
+        role: 'Youth Pastor - Ruaka',
         permissions: '::dash::receipts::requisitions',
       },
     },
