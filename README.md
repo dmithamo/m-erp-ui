@@ -2,7 +2,7 @@
 
 ## Intro
 
-The repo house the code for the UI for the aptly name app, `m-erp-ui`.
+The repo houses the code for the UI for the aptly name app, `m-erp-ui`.
 
 ### PS
 
