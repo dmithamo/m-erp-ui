@@ -4,8 +4,6 @@
 
 #### How should this be manually tested?
 
-#### What are the relevant Trello Cards?
-
 #### Screenshots (if appropriate)
 
 #### Anything else?

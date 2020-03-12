@@ -11,9 +11,9 @@ export function CopyrightWarning() {
         &nbsp;
       </span>
       <p id="warning">
-        This software is licensed only to --LICENSEE--
+        This software is licensed only to --MHC--
         <br />
-        It is illegal to use it except by explicit permission of --LICENSEE--
+        It is illegal to use it except by explicit permission of --MHC--
       </p>
     </CopyrightWarningContainer>
   );

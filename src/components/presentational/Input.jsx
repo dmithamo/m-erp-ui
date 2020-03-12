@@ -47,6 +47,7 @@ export default function Input(props) {
         {type === 'password' ? (
           <IconContainer>
             <TogglePasswordVisibilityBtn
+              type="button"
               id="password-visibility-toggle"
               onClick={togglePasswordVisibility}
             >
