@@ -16,10 +16,9 @@ describe('<SignInForm /> : not authenticated', () => {
   });
 
   test('it renders a login form', () => {
-    const { getByText, getByAltText } = wrapper;
+    const { getByText } = wrapper;
     expect(getByText(/sign in to continue/i)).toBeInTheDocument();
-    expect(getByAltText(/logo/i)).toBeInTheDocument();
-    expect(getByText(/this software is licensed/i)).toBeInTheDocument();
+    expect(getByText(/logo/i)).toBeInTheDocument();
   });
 
   test('renders two inputs <and their labels> and a submit btn', () => {
@@ -76,10 +75,8 @@ describe('<SignInForm /> : errored', () => {
   });
 
   test('it renders an error when there is one in the auth context', () => {
-    const { getByText, getByAltText, queryByText } = wrapper;
+    const { getByText, queryByText } = wrapper;
     expect(getByText('Wrong email or password')).toBeInTheDocument();
-    expect(getByAltText(/logo/i)).toBeInTheDocument();
-    expect(getByText(/this software is licensed/i)).toBeInTheDocument();
     expect(queryByText(/sign in to continue/i)).not.toBeInTheDocument();
   });
 });

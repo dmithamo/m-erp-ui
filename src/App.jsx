@@ -11,8 +11,17 @@ import {
   faCaretDown,
   faHome,
   faExclamationCircle,
+  faLink,
+  faThLarge,
+  faFileInvoice,
+  faReceipt,
+  faBusinessTime,
+  faTasks,
 } from '@fortawesome/free-solid-svg-icons';
-import { faCopyright } from '@fortawesome/free-regular-svg-icons';
+import {
+  faCopyright,
+  faQuestionCircle,
+} from '@fortawesome/free-regular-svg-icons';
 import ContextWrappedRouter from './config/ContextWrappedRouter';
 
 library.add(
@@ -27,6 +36,13 @@ library.add(
   faCaretDown,
   faHome,
   faExclamationCircle,
+  faLink,
+  faQuestionCircle,
+  faThLarge,
+  faFileInvoice,
+  faReceipt,
+  faBusinessTime,
+  faTasks,
 );
 
 function App() {

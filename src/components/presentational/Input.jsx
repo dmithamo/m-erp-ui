@@ -154,4 +154,6 @@ const TogglePasswordVisibilityBtn = styled.button`
   :hover {
     color: rgb(0, 0, 0);
   }
+
+  box-shadow: none !important;
 `;

@@ -5,12 +5,11 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { LogoSmall } from '../../presentational/Logo';
+// import { LogoSmall } from '../../presentational/Logo';
 import { FormContainer, FormHeader } from './styles/authFormStyles';
 import Input from '../../presentational/Input';
 import Button from '../../presentational/Button';
 import { InlineError } from '../../presentational/Error';
-import { CopyrightWarning } from '../../presentational/CopyrightWarning';
 import { useAuthContext } from '../../../context/auth';
 import { onSubmitListener, onChangeEventListener } from './eventListeners';
 
@@ -27,7 +26,7 @@ export default function LoginForm(props) {
     <Redirect to="/dashboard" />
   ) : (
     <FormContainer>
-      <LogoSmall />
+      <h3>Logo Here</h3>
 
       <FormHeader>
         {error ? (
@@ -71,8 +70,6 @@ export default function LoginForm(props) {
           Submit
         </Button>
       </form>
-
-      <CopyrightWarning />
     </FormContainer>
   );
 }

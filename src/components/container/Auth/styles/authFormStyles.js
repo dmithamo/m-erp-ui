@@ -18,6 +18,13 @@ export const FormContainer = styled.div`
 
   form {
     width: 90%;
+    button {
+      box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.4);
+    }
+
+    button:active {
+      box-shadow: none;
+    }
   }
 
   @media screen and (max-width: 500px) {

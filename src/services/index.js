@@ -1,4 +1,5 @@
 import axios from 'axios';
+import FAKE_DATA from './fakeData';
 
 require('dotenv').config();
 
@@ -9,8 +10,19 @@ const api = axios.create(config);
 
 const RestClient = {
   // Temporarily intercept login request
-  post: (path, params) =>
-    path === '/login' ? loginUserDummy(params) : api.post(path, params),
+  post: (path, params) => {
+    if (path === '/login') {
+      return loginUserDummy(params);
+    }
+
+    api.post(path, params);
+  },
+
+  get: (path) => {
+    if (path === '/requisitions') {
+      return FAKE_DATA.requisitions;
+    }
+  },
 };
 
 function loginUserDummy(params) {
@@ -19,7 +31,7 @@ function loginUserDummy(params) {
     data: {
       user: {
         ...params,
-        password: '!',
+        password: '!hidden',
         firstname: 'Lorraine',
         lastname: 'Bundi',
         role: 'Youth Pastor - Ruaka',

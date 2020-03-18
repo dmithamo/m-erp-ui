@@ -1,10 +1,10 @@
 import React from 'react';
 
 const Dashboard = () => (
-  <>
-    <h4>Welcome to the --LICENSEE-- Requisitions App.</h4>
+  <div>
+    <h4>Welcome to the --LLC-- Requisitions App.</h4>
     <p>[WIP]</p>
-  </>
+  </div>
 );
 
 export default Dashboard;

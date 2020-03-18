@@ -11,9 +11,10 @@ const DropDownMenu = (props) => {
   };
 
   const { onClose } = props;
+
   return (
     <Container>
-      <Button>
+      <Button onClick={() => {}}>
         <FontAwesomeIcon icon="id-card-alt" />
         <span>Profile</span>
       </Button>
@@ -33,8 +34,8 @@ const DropDownMenu = (props) => {
 
 const Container = styled.div`
   position: absolute;
-  right: 30px;
-  top: 35px;
+  left: 200px;
+  top: 105px;
   display: flex;
   flex-direction: column;
   justify-items: space-around;
@@ -43,6 +44,10 @@ const Container = styled.div`
   z-index: 1000;
   height: 20vh;
   width: 200px;
+
+  @media screen and (max-width: 1575px) {
+    left: 50px;
+  }
 `;
 
 const Button = styled.button`
@@ -62,8 +67,18 @@ const Button = styled.button`
 
   :hover {
     border-radius: 3px;
-    background-color: #e3e3e3;
-    border-left: 3px solid #bfff00;
+
+    background: #a8ff78; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+      to right,
+      #78ffd6,
+      #a8ff78
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+      to right,
+      #78ffd6,
+      #a8ff78
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   }
 
   span {

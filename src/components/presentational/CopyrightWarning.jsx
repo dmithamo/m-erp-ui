@@ -6,15 +6,15 @@ export function CopyrightWarning() {
   return (
     <CopyrightWarningContainer>
       <span>--NOTICE--</span>
+      <p id="warning">
+        This software is licensed only to --LLC--
+        <br />
+        It is illegal to use it except by explicit permission of --LLC--
+      </p>
       <span>
         <FontAwesomeIcon icon={['far', 'copyright']} />
-        &nbsp;
+        &nbsp;LLC 2020
       </span>
-      <p id="warning">
-        This software is licensed only to --MHC--
-        <br />
-        It is illegal to use it except by explicit permission of --MHC--
-      </p>
     </CopyrightWarningContainer>
   );
 }
@@ -28,12 +28,15 @@ const CopyrightWarningContainer = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  color: #00000080;
+  color: #000000;
 
-  span:first-of-type {
+  span {
+    padding: 2em;
   }
 
   p#warning {
+    margin: 0;
     font-size: 0.7em;
+    text-align: center;
   }
 `;

@@ -21,24 +21,31 @@ const StyledBtn = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(0, 193, 0);
   width: 100%;
   outline: none;
   border: none;
   border-radius: 3px;
-  color: white;
-  font-family: inherit;
-  font-size: 1em;
-  height: 42px;
+  color: black;
+  font: inherit;
+  font-weight: bold;
+  height: 55px;
   margin: 1rem 0;
   padding: 0.75em;
-  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.7);
+
+  cursor: pointer;
+
+  background: #a8ff78;
+  background: -webkit-linear-gradient(to right, #78ffd6, #a8ff78);
+  background: linear-gradient(to right, #78ffd6, #a8ff78);
+
+  :hover {
+    background: #a8ff78;
+  }
   :disabled {
     opacity: 0.3;
     cursor: not-allowed;
-  }
-  cursor: pointer;
-  :hover {
-    background-color: rgb(0, 185, 0);
+    background: #e3e3e3;
+    border: 1px solid #00000040;
+    box-shadow: none;
   }
 `;

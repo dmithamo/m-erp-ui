@@ -1,15 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import Navbar from '../NavBar';
+import Sidebar from '../../presentational/Sidebar';
 
 export function dashboardLayout({ children }) {
   return (
     <DashboardContainer>
-      <div id="nav-bar">
-        <Navbar />
-      </div>
-
+      <Sidebar />
       <div id="children">{children}</div>
     </DashboardContainer>
   );
@@ -25,16 +22,19 @@ fullPageLayout.propTypes = { children: PropTypes.any.isRequired };
 const DashboardContainer = styled.div`
   margin: 0;
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-
-  div#nav-bar {
-    margin: 0;
-  }
+  display: grid;
+  grid-template-columns: 1fr 7fr;
 
   div#children {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 0;
-    flex-grow: 1;
+    background-color: #ffffff80;
+  }
+
+  @media screen and (max-width: 1575px) {
+    grid-template-columns: 60px 1fr;
   }
 `;
 

@@ -26,25 +26,25 @@ const AuthenticatedUser = (props) => {
   const { user } = props;
   const { firstname, lastname, avatar, role } = user;
 
-  const trimmedFirstname = firstname.charAt(0);
   return (
     <UserContainer
       onKeyUp={(e) => toggleMenuOnKeyPress(e)}
       onClick={toggleShowMenu}
     >
-      <Avatar src={avatar || defaultAvatar} alt="profile picture" />
+      <Avatar>
+        <img src={avatar || defaultAvatar} alt="profile" />
+      </Avatar>
 
       <NameContainer>
-        <span id="name">{`${trimmedFirstname}. ${lastname}`}</span>
-        <span id="role">{role}</span>
+        <span id="name">{`${firstname} ${lastname}`}</span>
       </NameContainer>
 
-      <DropDownButton
-        id="dropdown-toggle"
-        isOpen={showMenu}
-        onClick={toggleShowMenu}
-      />
-      {showMenu && <DropDownMenu onClose={toggleShowMenu} />}
+      {showMenu && (
+        <DropDownMenu
+          user={{ firstname, lastname, role }}
+          onClose={toggleShowMenu}
+        />
+      )}
     </UserContainer>
   );
 };
@@ -64,28 +64,28 @@ DropDownButton.propTypes = {
   onClick: PropTypes.func.isRequired,
 };
 
-const Avatar = styled.img`
-  width: auto;
-  height: 50px;
+const Avatar = styled.span`
+  display: inline-block;
+  position: relative;
+  width: 180px;
+  height: 180px;
+  overflow: hidden;
   border-radius: 50%;
-`;
-
-const NameContainer = styled.p`
-  margin: 0;
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  span#name {
-    color: white;
-    font: inherit;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+
+  img {
+    margin: auto;
+    width: 98%;
+    height: 98%;
+    border-radius: 50%;
   }
-  span#role {
-    padding: 0;
-    margin: 0;
-    color: #e3e3e380;
-  }
-  span {
-    text-transform: capitalize;
+
+  @media screen and (max-width: 1575px) {
+    width: 40px;
+    height: 40px;
   }
 `;
 
@@ -96,14 +96,36 @@ const DropDownButtonContainer = styled.p`
   padding-right: 0.5em;
 `;
 
+const NameContainer = styled.p`
+  font-weight: bold;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: start;
+  font-size: 0.8em;
+  span {
+    padding: 0.5em;
+  }
+  span#name {
+    font: inherit;
+  }
+  span#role {
+    padding: 0;
+    margin: 0;
+    opacity: 0.5;
+  }
+  span {
+    text-transform: capitalize;
+  }
+`;
+
 const UserContainer = styled.div`
   cursor: pointer;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   box-sizing: border-box;
-
-  width: 200px;
 `;
 
 export default AuthenticatedUser;

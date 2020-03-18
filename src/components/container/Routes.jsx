@@ -23,6 +23,10 @@ export default function Routes() {
       {RouteItem({ auth, resource: SECURED_RESOURCES.dashboard })}
       {RouteItem({ auth, resource: SECURED_RESOURCES.requisitions })}
       {RouteItem({ auth, resource: SECURED_RESOURCES.receipts })}
+      {RouteItem({ auth, resource: SECURED_RESOURCES.invoices })}
+      {RouteItem({ auth, resource: SECURED_RESOURCES.budget })}
+      {RouteItem({ auth, resource: SECURED_RESOURCES.help })}
+      {RouteItem({ auth, resource: SECURED_RESOURCES.about })}
 
       <Route path="*" component={FourOhFour} />
     </Switch>
