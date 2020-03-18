@@ -1,10 +1,20 @@
 import { combineReducers } from 'redux';
-import authReducer from './authReducer';
+import genericReducer, { GENERIC_INIT_STATE } from './genericReducer';
 
 /**
- * @description Assemble all reducers into a single
- * root reducer namespaced according to function
+ * @description Abstract reducer creation logic to allow
+ * reuse of same generic reducer to manage all store slices
+ * except auth
  */
-export default function rootReducer() {
-  return combineReducers({ auth: authReducer });
+function createReducer() {
+  return (prevState, action) => {
+    const isInitializing = action.type === '@@INIT';
+
+    if (isInitializing) return GENERIC_INIT_STATE;
+    return genericReducer(prevState, action);
+  };
 }
+
+export default combineReducers({
+  requisitions: createReducer(),
+});

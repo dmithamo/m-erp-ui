@@ -4,7 +4,7 @@ import {
   createHandleAuthErrorAction,
   createLogoutUserAction,
 } from '../../actions/authActions';
-import * as authActionTypes from '../../actions/authActionTypes';
+import * as authActionTypes from '../../actions/authTypes';
 
 test('createLoginRequest return the right action', () => {
   expect(createLoginRequestAction()).toMatchObject({

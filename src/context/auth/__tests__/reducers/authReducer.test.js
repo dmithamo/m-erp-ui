@@ -1,5 +1,5 @@
 import authReducer from '../../reducers/authReducer';
-import * as authActionTypes from '../../actions/authActionTypes';
+import * as authActionTypes from '../../actions/authTypes';
 
 test('returns original state by default', () => {
   expect(authReducer(undefined, { type: null, payload: null })).toMatchObject({

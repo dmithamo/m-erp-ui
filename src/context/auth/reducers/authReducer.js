@@ -3,7 +3,7 @@ import {
   LOGIN_USER,
   LOGOUT_USER,
   LOGIN_ERR,
-} from '../actions/authActionTypes';
+} from '../actions/authTypes';
 
 export const initialAuthState = { isFetching: false, user: null, error: null };
 

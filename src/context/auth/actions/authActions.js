@@ -8,7 +8,7 @@
  *  2. store is substitutable with 'context' here
  */
 
-import { LOADING, LOGIN_USER, LOGOUT_USER, LOGIN_ERR } from './authActionTypes';
+import { LOADING, LOGIN_USER, LOGOUT_USER, LOGIN_ERR } from './authTypes';
 
 /**
  * @description Indicate that a n/w request for auth
