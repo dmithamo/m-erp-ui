@@ -45,6 +45,7 @@ export default () => {
     key: 'llc-erp',
     storage,
     transforms: [encryptor],
+    whitelist: ['auth'],
   };
   const persistedReducer = persistReducer(persistConfig, rootReducer);
   const store = configureStore(persistedReducer);

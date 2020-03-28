@@ -20,7 +20,11 @@ const RestClient = {
 
   get: (path) => {
     if (path === '/requisitions') {
-      return FAKE_DATA.requisitions;
+      return {
+        message: 'OK',
+        status: 200,
+        data: { requisitions: FAKE_DATA.requisitions },
+      };
     }
 
     return api.get(path);

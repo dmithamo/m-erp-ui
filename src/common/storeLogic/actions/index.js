@@ -103,6 +103,7 @@ export function fetchResources(stateName, path) {
 
       if (res && res.status === 200) {
         dispatch(fetchSuccess(res.data[resourceName], stateName));
+        return;
       }
     } catch (error) {
       dispatch(fetchFailure(handleApiError(error), stateName));

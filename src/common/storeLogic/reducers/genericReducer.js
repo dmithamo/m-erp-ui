@@ -6,7 +6,7 @@ import {
   POST_SUCCESS,
   POST_FAILURE,
   CLEAR_FORM_ERRORS,
-} from '../actions/genericActions';
+} from '../actions';
 
 /**
  * @description Update state in response to an action
