@@ -87,13 +87,13 @@ export function clearFormErrors(stateName) {
  * API response
  * @param {string} stateName Slice of state that this action targets
  */
-export function fetchResources(stateName, path) {
+export function fetchResources(stateName, path, params = null) {
   return async (dispatch) => {
     // toggle isFetching to true to show loader
     dispatch(initiateFetchRequest(stateName));
 
     try {
-      const res = await api.get(path);
+      const res = await api.get(path, params);
 
       const resourceName = `${
         stateName.includes('single')

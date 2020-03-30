@@ -2,10 +2,10 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
-import { renderByType } from './helpers/renderVal';
+import renderByType from './helpers/renderVal';
 import { colors } from '../../styles';
 
-const Table = ({ stateName, columns, dataSource }) => {
+const Table = ({ stateName, columns, dataSource, actions }) => {
   const keys = columns.map((col) => col.key);
 
   if (dataSource.length === 0) {
@@ -19,6 +19,7 @@ const Table = ({ stateName, columns, dataSource }) => {
           {columns.map((col) => (
             <StyledTableCell key={col.key}>{col.displayName}</StyledTableCell>
           ))}
+          <StyledTableCell>Actions</StyledTableCell>
         </tr>
       </thead>
       <tbody>
@@ -31,6 +32,17 @@ const Table = ({ stateName, columns, dataSource }) => {
                 </Fragment>
               </StyledTableCell>
             ))}
+            <StyledTableCell>
+              {actions.map((action) => (
+                <StyledTableButton
+                  key={uuidv4()}
+                  type="button"
+                  onClick={() => action.onClick(item)}
+                >
+                  {action.value}
+                </StyledTableButton>
+              ))}
+            </StyledTableCell>
           </tr>
         ))}
       </tbody>
@@ -42,6 +54,7 @@ Table.propTypes = {
   stateName: PropTypes.string.isRequired,
   columns: PropTypes.array.isRequired,
   dataSource: PropTypes.array.isRequired,
+  actions: PropTypes.array.isRequired,
 };
 
 const StyledTableCell = styled.td`
@@ -74,6 +87,10 @@ const StyledTable = styled.table`
   padding: 1em;
   border-radius: 5px;
   border-collapse: collapse;
+`;
+
+const StyledTableButton = styled.button`
+  outline: none;
 `;
 
 export default Table;

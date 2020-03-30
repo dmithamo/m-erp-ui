@@ -4,8 +4,7 @@
  */
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { FormContainer, FormHeader } from './styles';
 import Input from '../../common/components/Input';
 import Button from '../../common/components/Button';
@@ -17,27 +16,28 @@ import {
   addValidationError,
 } from './storeLogic/actions';
 
-export function SignInForm(props) {
-  const { user, error, onSubmit, onValidationError, onClearFormErrors } = props;
+export default function SignInForm() {
+  const { user, error } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const [formValues, setFormValues] = useState({ email: '', password: '' });
 
   const onFormInput = (e) => {
-    error && onClearFormErrors();
+    error && dispatch(clearFormErrors());
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = () => {
     if (!isValidEmail(formValues.email)) {
-      onValidationError('INVALID_PARAM_EMAIL');
+      dispatch(addValidationError({ message: 'INVALID_PARAM_EMAIL' }));
       return;
     }
 
     if (!formValues.password) {
-      onValidationError('INVALID_PARAM_PASSWORD');
+      dispatch(addValidationError({ message: 'INVALID_PARAM_PASSWORD' }));
       return;
     }
 
-    onSubmit(formValues);
+    dispatch(loginUser(formValues));
   };
 
   const { email, password } = formValues;
@@ -46,7 +46,7 @@ export function SignInForm(props) {
   ) : (
     <FormContainer>
       <FormHeader>
-        <h3 className="logo">&lt;Logo /&gt;</h3>
+        <span className="logo">&lt;Logo /&gt;</span>
         {error ? <InlineError category="auth" error={error} /> : ''}
       </FormHeader>
 
@@ -91,28 +91,3 @@ export function SignInForm(props) {
     </FormContainer>
   );
 }
-
-SignInForm.propTypes = {
-  user: PropTypes.any.isRequired,
-  error: PropTypes.any.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-  onClearFormErrors: PropTypes.func.isRequired,
-  onValidationError: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  user: state.auth.user,
-  error: state.auth.error,
-  isPosting: state.auth.isPosting,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onSubmit: ({ email, password }) => dispatch(loginUser({ email, password })),
-
-  onClearFormErrors: () => dispatch(clearFormErrors()),
-
-  onValidationError: (error) =>
-    dispatch(addValidationError({ message: error })),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(SignInForm);

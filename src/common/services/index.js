@@ -41,6 +41,7 @@ function loginUserDummy(params) {
         firstname: 'Khalegi',
         lastname: 'Bundi',
         role: 'Pastor For Youth',
+        reportsTo: 'julie',
         permissions: '::all::',
       },
     },

@@ -1,14 +1,15 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import NotFound from './NotFound';
 import { FrontLayout, DashboardLayout } from '../common/components/Layouts';
 import SignInForm from './auth/SignInForm';
 import RESOURCES from '../common/constants/resources';
+import Loader from '../common/components/Loader';
 
-export function Routes(props) {
-  const { user, isPosting } = props;
+export function Routes() {
+  const { user, isPosting } = useSelector((state) => state.auth);
   return (
     <BrowserRouter>
       <Switch>
@@ -48,11 +49,7 @@ export function Routes(props) {
     </BrowserRouter>
   );
 }
-
-Routes.propTypes = {
-  user: PropTypes.any.isRequired,
-  isPosting: PropTypes.bool.isRequired,
-};
+export default Routes;
 
 function RouteItem(props) {
   const {
@@ -77,7 +74,7 @@ function RouteItem(props) {
           exact={exact}
           path={path}
           render={() => (
-            <Layout>{isPosting ? <h2>FML</h2> : <Component />}</Layout>
+            <Layout>{isPosting ? <Loader /> : <Component />}</Layout>
           )}
         />
       ) : (
@@ -105,10 +102,3 @@ RouteItem.defaultProps = {
   isPosting: false,
   user: false,
 };
-
-const mapStateToProps = (state) => ({
-  user: state.auth.user,
-  isPosting: state.auth.isPosting,
-});
-
-export default connect(mapStateToProps, null)(Routes);

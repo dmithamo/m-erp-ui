@@ -3,26 +3,28 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import RESOURCES from '../../common/constants/resources';
 import User from './AuthenticatedUser';
 import { logoutUser } from '../auth/storeLogic/actions';
 import { colors } from '../../common/styles';
 
-export function Sidebar(props) {
-  const { user, onLogout } = props;
+export default function Sidebar() {
+  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   return (
     <StyledSidebar>
       <div id="user">
-        <User user={user} onLogout={onLogout} />
+        <User user={user} onLogout={() => dispatch(logoutUser())} />
       </div>
 
       <div id="upper">
-        {Object.values(RESOURCES)
-          .filter((r) => !['help', 'LLC 2020'].includes(r.name))
-          .map((resource) => (
-            <SidebarItem key={resource.path} route={resource} />
-          ))}
+        <SidebarItem route={RESOURCES.dashboard} />
+        <SidebarItem route={RESOURCES.requisitions} />
+        <SidebarItem route={RESOURCES.receipts} />
+        <SidebarItem route={RESOURCES.invoices} />
+        <SidebarItem route={RESOURCES.budget} />
+        <SidebarItem route={RESOURCES.notifications} />
       </div>
 
       <div id="lower">
@@ -32,11 +34,6 @@ export function Sidebar(props) {
     </StyledSidebar>
   );
 }
-
-Sidebar.propTypes = {
-  user: PropTypes.any.isRequired,
-  onLogout: PropTypes.func.isRequired,
-};
 
 const StyledSidebar = styled.nav`
   background: #a8ff78;
@@ -76,11 +73,11 @@ const StyledSidebar = styled.nav`
   }
 `;
 
-export function SidebarItem({ route: { path, name, icon } }) {
+export function SidebarItem({ route: { path, resourceName, icon } }) {
   return (
     <StyledLink activeClassName="isActive" to={path}>
       <FontAwesomeIcon icon={icon} />
-      <span>{name}</span>
+      <span>{resourceName}</span>
     </StyledLink>
   );
 }
@@ -88,7 +85,7 @@ export function SidebarItem({ route: { path, name, icon } }) {
 SidebarItem.propTypes = {
   route: PropTypes.shape({
     path: PropTypes.string,
-    name: PropTypes.string,
+    resourceName: PropTypes.string,
     icon: PropTypes.any,
   }).isRequired,
 };
@@ -131,9 +128,3 @@ const StyledLink = styled(NavLink)`
     }
   }
 `;
-
-const mapStateToProps = (state) => ({ user: state.auth.user });
-const mapDispatchToProps = (dispatch) => ({
-  onLogout: () => dispatch(logoutUser()),
-});
-export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

@@ -16,11 +16,11 @@ export const FormContainer = styled.div`
 
   height: 55vh;
 
-  h3.logo {
-    margin: 0;
+  span.logo {
+    margin: 1em 0;
     width: 100%;
     padding: 2em;
-    font-size: 1.2rem;
+    font-size: 2rem;
   }
 
   form {

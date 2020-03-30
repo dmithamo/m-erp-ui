@@ -1,11 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import LoadingIcon from '../assets/logo-nav.png';
 
 export default function Loader() {
   return (
     <LoaderContainer>
-      <img src={LoadingIcon} alt="loading icon" />
+      <p>Loading ...</p>
     </LoaderContainer>
   );
 }
@@ -18,7 +17,7 @@ const LoaderContainer = styled.div`
   width: 100%;
   box-sizing: border-box;
 
-  img {
+  p {
     @keyframes loader-scale {
       from {
         transform: scale(0.5);

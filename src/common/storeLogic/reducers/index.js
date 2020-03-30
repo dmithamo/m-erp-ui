@@ -22,4 +22,5 @@ function createNamedReducer(genericReducer, reducerName) {
 export default combineReducers({
   auth: authReducer,
   requisitions: createNamedReducer(reducer, 'requisitions'),
+  singleRequisition: createNamedReducer(reducer, 'singleRequisition'),
 });

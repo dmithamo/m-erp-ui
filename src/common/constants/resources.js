@@ -2,10 +2,11 @@ import Dashboard from '../../features/Dashboard';
 import WIPTemp from '../../features/WIPTemp';
 import LicenseInfo from '../../features/LicenseInfo';
 import Requisitions from '../../features/requisitions';
+import SingleRequisitionView from '../../features/requisitions/SingleReq';
 
 const RESOURCES = {
   dashboard: {
-    name: 'dashboard',
+    resourceName: 'dashboard',
     path: '/dashboard',
     component: Dashboard,
     icon: 'th-large',
@@ -13,15 +14,23 @@ const RESOURCES = {
   },
 
   requisitions: {
-    name: 'requisitions',
+    resourceName: 'requisitions',
     path: '/manage/resources/requisitions',
     component: Requisitions,
     icon: 'tasks',
     permissions: '::requisitions::',
   },
 
+  singleRequisition: {
+    resourceName: 'singleRequisition',
+    path: '/manage/resources/requisitions/:id/edit',
+    component: SingleRequisitionView,
+    icon: 'tasks',
+    permissions: '::requisitions::',
+  },
+
   invoices: {
-    name: 'invoices',
+    resourceName: 'invoices',
     path: '/manage/resources/invoices',
     component: WIPTemp,
     icon: 'file-invoice',
@@ -29,7 +38,7 @@ const RESOURCES = {
   },
 
   receipts: {
-    name: 'receipts',
+    resourceName: 'receipts',
     path: '/manage/resources/receipts',
     component: WIPTemp,
     icon: 'receipt',
@@ -37,7 +46,7 @@ const RESOURCES = {
   },
 
   budget: {
-    name: 'budget',
+    resourceName: 'budget',
     path: '/manage/resources/budgets',
     component: WIPTemp,
     icon: 'business-time',
@@ -45,7 +54,7 @@ const RESOURCES = {
   },
 
   notifications: {
-    name: 'notifications',
+    resourceName: 'notifications',
     path: '/manage/resources/notifications',
     component: WIPTemp,
     icon: ['far', 'bell'],
@@ -53,7 +62,7 @@ const RESOURCES = {
   },
 
   help: {
-    name: 'help',
+    resourceName: 'help',
     path: '/help',
     component: WIPTemp,
     icon: ['far', 'question-circle'],
@@ -61,7 +70,7 @@ const RESOURCES = {
   },
 
   about: {
-    name: 'LLC 2020',
+    resourceName: 'LLC 2020',
     path: '/about',
     component: LicenseInfo,
     icon: ['far', 'copyright'],

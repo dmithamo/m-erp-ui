@@ -28,6 +28,13 @@ const AUTH_ERR_MESSAGES = {
   ...GENERIC_ERROR_RESPONSES,
 };
 
+const RESOURCES_ERR_MESSAGES = {
+  ...GENERIC_ERROR_RESPONSES,
+  NOT_FOUND: {
+    'en-uk': 'Not found',
+  },
+};
+
 // const SUCCESS_RESPONSES = {};
 
 /**
@@ -40,6 +47,9 @@ export default function generateErrorMessage(category, msg, lang = 'en-uk') {
   switch (category) {
     case 'auth':
       return AUTH_ERR_MESSAGES[msg][lang];
+
+    case 'requisitions':
+      return RESOURCES_ERR_MESSAGES[msg][lang];
 
     default:
       throw new Error(`Unhandled err category: ${category}`);

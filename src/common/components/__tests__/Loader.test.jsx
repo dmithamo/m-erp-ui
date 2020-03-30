@@ -4,8 +4,8 @@ import { shallow } from 'enzyme';
 import Loader from '../Loader';
 
 test('renders without crashing', () => {
-  const { getByAltText } = render(<Loader />);
+  const { getByText } = render(<Loader />);
 
-  expect(getByAltText(/loading icon/i)).toBeInTheDocument();
+  expect(getByText(/loading/i)).toBeInTheDocument();
   shallow(<Loader />); // Bonus test :)
 });
