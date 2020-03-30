@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import RESOURCES from '../../common/constants/resources';
 import User from './AuthenticatedUser';
 import { logoutUser } from '../auth/storeLogic/actions';
+import { colors } from '../../common/styles';
 
 export function Sidebar(props) {
   const { user, onLogout } = props;
@@ -53,7 +54,7 @@ const StyledSidebar = styled.nav`
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    color: black;
+    color: ${colors.black};
   }
 
   div#user {
@@ -102,7 +103,7 @@ const StyledLink = styled(NavLink)`
   padding: 0.8em;
   text-decoration: none;
   text-transform: capitalize;
-  color: #000;
+  color: ${colors.black};
   opacity: 0.7;
   margin-bottom: 2em;
   font-weight: bold;
@@ -113,12 +114,12 @@ const StyledLink = styled(NavLink)`
 
   &.isActive {
     opacity: 1;
-    background-color: #fff;
+    background-color: ${colors.white};
   }
 
   :hover {
     opacity: 1;
-    background-color: #fff;
+    background-color: ${colors.white};
   }
 
   @media screen and (max-width: 1024px) {

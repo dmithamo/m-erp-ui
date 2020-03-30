@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Sidebar from '../../../features/sidebar';
+import { colors } from '../../styles';
 
 export function DashboardLayout({ children }) {
   return (
@@ -30,7 +31,7 @@ const DashboardContainer = styled.div`
     justify-content: center;
     align-items: center;
     margin: 0;
-    background-color: #ffffff80;
+    background-color: ${colors.greyBackground};
   }
 
   @media screen and (max-width: 1024px) {

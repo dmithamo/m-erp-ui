@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { colors } from '../styles';
 
 export default function Button({ type, isDisabled, children, onClick }) {
   return (
@@ -25,7 +27,7 @@ const StyledBtn = styled.button`
   outline: none;
   border: none;
   border-radius: 3px;
-  color: black;
+  color: ${colors.black};
   font: inherit;
   font-weight: bold;
   height: 55px;
@@ -47,5 +49,30 @@ const StyledBtn = styled.button`
     background: #e3e3e3;
     border: 1px solid #00000040;
     box-shadow: none;
+  }
+`;
+
+export const ButtonWithIcon = ({ icon, onClick }) => (
+  <ButtonWithIConWrapper type="button" onClick={onClick}>
+    <FontAwesomeIcon icon={icon} />
+  </ButtonWithIConWrapper>
+);
+
+ButtonWithIcon.propTypes = {
+  icon: PropTypes.any.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
+
+const ButtonWithIConWrapper = styled.button`
+  background: none;
+  outline: none !important;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  color: ${colors.grey};
+
+  :hover {
+    color: ${colors.black};
   }
 `;

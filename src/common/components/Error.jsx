@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import generateErrorMessage from '../constants/messages';
+import { colors } from '../styles';
 
 /**
  * @description Render an inline error
@@ -21,7 +22,7 @@ const InlineErrorContainer = styled.span`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  color: red;
+  color: ${colors.red};
 `;
 
 InlineError.propTypes = {

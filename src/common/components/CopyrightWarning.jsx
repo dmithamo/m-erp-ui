@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { colors } from '../styles';
 
 export function CopyrightWarning() {
   return (
@@ -28,7 +29,7 @@ const CopyrightWarningContainer = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  color: #000000;
+  color: ${colors.black};
 
   span {
     padding: 2em;

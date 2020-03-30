@@ -9,7 +9,12 @@ export function Requisitions(props) {
 
   const columns = [
     { key: 'number', displayName: '#', isFilterable: true, isSearchable: true },
-    { key: 'id', displayName: 'id', isFilterable: true, isSearchable: true },
+    {
+      key: 'short_id',
+      displayName: 'id',
+      isFilterable: true,
+      isSearchable: true,
+    },
     {
       key: 'title',
       displayName: 'summary',
@@ -18,7 +23,7 @@ export function Requisitions(props) {
     },
     {
       key: 'amount',
-      displayName: 'amount',
+      displayName: 'amount (KES)',
       isFilterable: true,
       isSearchable: true,
     },
@@ -27,10 +32,6 @@ export function Requisitions(props) {
       displayName: 'approvals',
       isFilterable: true,
       isSearchable: true,
-      details: [
-        { key: 'name', displayName: 'by' },
-        { key: 'role', displayName: 'role' },
-      ],
     },
     {
       key: 'createdAt',
@@ -49,12 +50,15 @@ export function Requisitions(props) {
   const dataSource = requisitions.map((req) => ({
     number: requisitions.indexOf(req) + 1,
     id: req.id,
+    short_id: String(req.id).slice(0, 8),
     title: req.title,
     amount: req.amount,
     approvals: req.approvals.map((approval) => ({
+      id: approval.id,
       name: approval.name,
       role: approval.role,
       status: approval.status,
+      createdAt: approval.createdAt,
     })),
     createdAt: req.createdAt,
     updatedAt: req.updatedAt,

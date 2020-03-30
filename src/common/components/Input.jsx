@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { colors } from '../styles';
 
 export default function Input(props) {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -87,7 +88,7 @@ Input.defaultProps = {
 };
 
 const IconContainer = styled.p`
-  background-color: white;
+  background-color: ${colors.white};
   border-radius: 3px;
   margin: 0;
 `;
@@ -108,14 +109,14 @@ const InputContainer = styled.div`
   margin-bottom: 2.5em;
 
   p {
-    background-color: white;
+    background-color: ${colors.white};
     border-radius: 3px;
   }
 
   :focus-within {
     border: 1px solid rgba(0, 0, 0, 0.5);
   }
-  background-color: white;
+  background-color: ${colors.white};
 `;
 
 const StyledInput = styled.input`
@@ -132,12 +133,12 @@ const StyledInput = styled.input`
   ::placeholder {
     text-transform: capitalize;
     font-family: inherit;
-    color: rgba(0, 0, 0, 0.38);
+    color: ${colors.grey};
   }
 `;
 
 const StyledLabel = styled.label`
-  color: #00000080;
+  color: ${colors.black};
   text-align: start;
   text-transform: capitalize;
   display: flex;
@@ -146,14 +147,10 @@ const StyledLabel = styled.label`
 `;
 
 const TogglePasswordVisibilityBtn = styled.button`
-  color: rgba(0, 0, 0, 0.75);
+  color: ${colors.black};
   background: none;
   border: none;
   outline: none;
   cursor: pointer;
-  :hover {
-    color: rgb(0, 0, 0);
-  }
-
   box-shadow: none !important;
 `;

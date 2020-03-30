@@ -1,9 +1,10 @@
 import styled from 'styled-components';
+import { colors, shadows } from '../../../common/styles';
 
 export const FormContainer = styled.div`
-  box-shadow: 0 1px 2px 2px rgb(193, 193, 193);
+  box-shadow: ${shadows.modalShadow};
   border-radius: 5px;
-  background-color: white;
+  background-color: ${colors.white};
   width: 450px;
   font-size: 1em;
   text-align: center;
@@ -11,15 +12,22 @@ export const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
 
-  height: 60vh;
-  padding: 1em 0;
+  height: 55vh;
+
+  h3.logo {
+    margin: 0;
+    width: 100%;
+    padding: 2em;
+    font-size: 1.2rem;
+  }
 
   form {
-    width: 90%;
+    transition: all ease-in-out 0.5s;
+    width: 85%;
     button {
-      box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.4);
+      box-shadow: ${shadows.modalShadow};
     }
 
     button:active {

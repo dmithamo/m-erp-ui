@@ -7,7 +7,6 @@ import {
   faEyeSlash,
   faIdCardAlt,
   faSignOutAlt,
-  faTimesCircle,
   faCaretDown,
   faHome,
   faExclamationCircle,
@@ -17,11 +16,16 @@ import {
   faReceipt,
   faBusinessTime,
   faTasks,
+  faHourglassStart,
+  faEllipsisV,
+  faEllipsisH,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faCopyright,
   faQuestionCircle,
   faBell,
+  faCheckCircle,
+  faTimesCircle,
 } from '@fortawesome/free-regular-svg-icons';
 import Routes from '../features/Routes';
 
@@ -45,6 +49,10 @@ library.add(
   faBusinessTime,
   faTasks,
   faBell,
+  faHourglassStart,
+  faCheckCircle,
+  faEllipsisV,
+  faEllipsisH,
 );
 
 export function App() {

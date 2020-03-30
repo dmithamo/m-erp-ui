@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { colors, shadows } from '../../common/styles';
 
 const DropDownMenu = (props) => {
   const { onClose, onLogout } = props;
@@ -19,7 +20,7 @@ const DropDownMenu = (props) => {
       </Button>
 
       <Button onClick={onClose}>
-        <FontAwesomeIcon icon="times-circle" />
+        <FontAwesomeIcon icon={['far', 'times-circle']} />
         <span>Close</span>
       </Button>
     </Container>
@@ -33,8 +34,9 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-items: space-around;
-  background-color: #f9f9f9;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  background-color: ${colors.greyBackground};
+  /* box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); */
+  box-shadow: ${shadows.popUpShadow};
   z-index: 1000;
   height: 20vh;
   width: 200px;

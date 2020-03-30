@@ -45,14 +45,9 @@ export function SignInForm(props) {
     <Redirect to="/dashboard" />
   ) : (
     <FormContainer>
-      <h3>Logo Here</h3>
-
       <FormHeader>
-        {error ? (
-          <InlineError category="auth" error={error} />
-        ) : (
-          'Sign in to continue'
-        )}
+        <h3 className="logo">&lt;Logo /&gt;</h3>
+        {error ? <InlineError category="auth" error={error} /> : ''}
       </FormHeader>
 
       <form
