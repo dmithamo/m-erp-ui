@@ -39,9 +39,10 @@ const RESOURCES_ERR_MESSAGES = {
 
 /**
  * @description Generate error response
- * @param {string} category Class where err is generated
- * @param {string} lang
+ * @param {string} category Classification of err err is generated (by feature)
  * @param {string} msg
+ * @param {string} lang
+ * @return {String} message
  */
 export default function generateErrorMessage(category, msg, lang = 'en-uk') {
   switch (category) {

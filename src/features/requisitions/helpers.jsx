@@ -1,21 +1,18 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ButtonWithIcon } from '../../common/components/Button';
 import { colors } from '../../common/styles';
 
 export const renderApproval = (values) => (
   <StyledApprovalsWrapper key="approvals">
     {values.map((approval) => (
-      <StyledApproval
-        key={approval.id}
-        className={approval.status.toLowerCase()}
-      >
+      <StyledApproval key={approval.id} className={approval.status}>
         <FontAwesomeIcon
-          className={`status ${approval.status.toLowerCase()}`}
+          className={`status ${approval.status}`}
           icon={getIcon(approval.status)}
         />
-        {approval.role}
+        {approval.status}
         <ButtonWithIcon icon="ellipsis-v" onClick={() => {}} />
       </StyledApproval>
     ))}
@@ -24,13 +21,13 @@ export const renderApproval = (values) => (
 
 export const getIcon = (status) => {
   switch (status) {
-    case 'APPROVED':
+    case 2:
       return ['far', 'check-circle'];
 
-    case 'REJECTED':
+    case 1:
       return ['far', 'times-circle'];
 
-    case 'PENDING':
+    case 0:
       return 'hourglass-start';
 
     default:
@@ -39,6 +36,7 @@ export const getIcon = (status) => {
 };
 
 const StyledApproval = styled.span`
+  text-transform: capitalize;
   width: 150px;
   padding: 0.9em;
   display: grid;
@@ -59,7 +57,7 @@ const StyledApprovalsWrapper = styled.p`
   justify-content: center;
   align-items: center;
 
-  span.approved {
+  span.2 {
     border-left: 5px solid ${colors.darkGreen};
     svg.status {
       color: ${colors.darkGreen};

@@ -1,9 +1,9 @@
 import { applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import thunk from 'redux-thunk';
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage/session';
+import { persistReducer, persistStore } from 'redux-persist';
 import createEncryptor from 'redux-persist-transform-encrypt';
+import storage from 'redux-persist/lib/storage/session';
+import thunk from 'redux-thunk';
 import rootReducer from '../common/storeLogic/reducers';
 import { initialAuthState } from '../features/auth/storeLogic/reducer';
 
@@ -18,6 +18,8 @@ const GENERIC_INIT_STATE = {
 
 /**
  * @description Create a redux store
+ * @param {Function} reducerFn Root reducer for the application
+ * @return {object} store
  */
 function configureStore(reducerFn) {
   const middlewares = [thunk];

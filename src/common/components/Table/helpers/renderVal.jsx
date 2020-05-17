@@ -1,10 +1,12 @@
 import React from 'react';
 import { renderApproval } from '../../../../features/requisitions/helpers';
+
 /**
  * @description Render [table] value depending on its type
-
- * @param {any} value
- * @param {?array} list of desired attributes
+ * @param {string} value
+ * @param {string} key
+ * @param {?array} desiredAttrs of desired attributes
+ * @return {JSX}
  */
 const renderByType = (value, key = '', desiredAttrs = []) => {
   // null, undefined, bool, empty str, zero

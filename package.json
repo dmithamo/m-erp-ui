@@ -8,10 +8,8 @@
     "test": "react-scripts test",
     "test:cov": "npm test -- --coverage --watchAll --verbose",
     "eject": "react-scripts eject",
-    "lint:all": "eslint --fix -c './.eslintrc.json' 'src/**/*.j{s,sx}'"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "lint:all": "eslint --fix -c './.eslintrc.json' 'src/**/*.j{s,sx}'",
+    "lint:config": "eslint --init"
   },
   "browserslist": {
     "production": [
@@ -54,6 +52,7 @@
   },
   "devDependencies": {
     "@types/jest": "^25.2.2",
+    "eslint": "^7.0.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",

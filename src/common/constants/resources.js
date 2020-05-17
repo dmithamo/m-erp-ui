@@ -1,8 +1,8 @@
 import Dashboard from '../../features/Dashboard';
-import WIPTemp from '../../features/WIPTemp';
 import LicenseInfo from '../../features/LicenseInfo';
 import Requisitions from '../../features/requisitions';
 import SingleRequisitionView from '../../features/requisitions/SingleReq';
+import WIPTemp from '../../features/WIPTemp';
 
 const RESOURCES = {
   dashboard: {
@@ -15,7 +15,7 @@ const RESOURCES = {
 
   requisitions: {
     resourceName: 'requisitions',
-    path: '/manage/resources/requisitions',
+    path: '/requisitions',
     component: Requisitions,
     icon: 'tasks',
     permissions: '::requisitions::',
@@ -23,7 +23,7 @@ const RESOURCES = {
 
   singleRequisition: {
     resourceName: 'singleRequisition',
-    path: '/manage/resources/requisitions/:id/edit',
+    path: '/requisitions/:id/edit',
     component: SingleRequisitionView,
     icon: 'tasks',
     permissions: '::requisitions::',
@@ -31,7 +31,7 @@ const RESOURCES = {
 
   invoices: {
     resourceName: 'invoices',
-    path: '/manage/resources/invoices',
+    path: '/invoices',
     component: WIPTemp,
     icon: 'file-invoice',
     permissions: '::invoice::',
@@ -39,7 +39,7 @@ const RESOURCES = {
 
   receipts: {
     resourceName: 'receipts',
-    path: '/manage/resources/receipts',
+    path: '/receipts',
     component: WIPTemp,
     icon: 'receipt',
     permissions: '::receipt::',
@@ -47,7 +47,7 @@ const RESOURCES = {
 
   budget: {
     resourceName: 'budget',
-    path: '/manage/resources/budgets',
+    path: '/budgets',
     component: WIPTemp,
     icon: 'business-time',
     permissions: '::budget::',
@@ -55,7 +55,7 @@ const RESOURCES = {
 
   notifications: {
     resourceName: 'notifications',
-    path: '/manage/resources/notifications',
+    path: '/notifications',
     component: WIPTemp,
     icon: ['far', 'bell'],
     permissions: '::notifications::',

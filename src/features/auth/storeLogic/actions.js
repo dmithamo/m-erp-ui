@@ -15,12 +15,14 @@ export const CLEAR_FORM_ERRORS = 'CLEAR_FORM_ERRORS';
 /**
  * @description Indicate that a n/w request for auth
  * is in progress
+ * @return {object} action
  */
 export const initiateLoginRequest = () => ({ type: LOADING });
 
 /**
  * @description Record a user as authenticated in the store
  * @param {object} user to add as authenticatedUser in store
+ * @return {object} action
  */
 export const loginSuccess = (user) => ({
   type: LOGIN_USER,
@@ -30,12 +32,14 @@ export const loginSuccess = (user) => ({
 /**
  * @description Remove authenticatedUser from store on
  * logout
+ * @return {object} action
  */
 export const logoutSuccess = () => ({ type: LOGOUT_USER });
 
 /**
  * @description Handle errors arising during auth
  * @param {object} error
+ * @return {object} action
  */
 export const loginFail = (error) => ({
   type: LOGIN_ERR,
@@ -45,12 +49,19 @@ export const loginFail = (error) => ({
 /**
  * @description Remove errors from store
  * @param {string} stateName Slice of state that this action targets
+ * @return {object} action
  */
 export function clearFormErrors() {
   return { type: CLEAR_FORM_ERRORS };
 }
 
 // -- @thunks
+
+/**
+ * @description Perform a request for auth
+ * @param {object} user
+ * @return {object} ?
+ */
 export function loginUser(user) {
   return async (dispatch) => {
     dispatch(initiateLoginRequest());
@@ -79,6 +90,10 @@ export function loginUser(user) {
   };
 }
 
+/**
+ * @description Perform a rquest for logout
+ * @return {object} ?
+ */
 export function logoutUser() {
   return async (dispatch) => {
     dispatch(logoutSuccess());
@@ -89,6 +104,7 @@ export function logoutUser() {
  * @description Dispatch an error action to the store
  * @param {object} error
  * @param {string} stateName Slice of state that this action targets
+ * @return {object}
  */
 export function addValidationError(error) {
   return (dispatch) => dispatch(loginFail(error));
@@ -96,7 +112,7 @@ export function addValidationError(error) {
 
 /**
  * @description Dispatch an action to reset error to false
- * @param {string} stateName Slice of state that this action targets
+ * @return {object}
  */
 export function removeFormErrors() {
   return (dispatch) => dispatch(clearFormErrors());

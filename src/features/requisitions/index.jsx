@@ -1,14 +1,19 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { InlineError } from '../../common/components/Error';
+import Loader from '../../common/components/Loader';
 import Table from '../../common/components/Table';
 import { fetchResources } from '../../common/storeLogic/actions';
-import Loader from '../../common/components/Loader';
-import { InlineError } from '../../common/components/Error';
 
+/**
+ * @description The Requisitions view
+ * @return {JSX}
+ */
 export default function Requisitions() {
   const { data, isFetching, fetchError } = useSelector(
     (state) => state.requisitions,
+    shallowEqual,
   );
   const { user } = useSelector((state) => state.auth);
 

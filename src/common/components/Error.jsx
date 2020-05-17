@@ -1,12 +1,13 @@
-import React from 'react';
-import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
+import React from 'react';
+import styled from 'styled-components';
 import generateErrorMessage from '../constants/messages';
 import { colors } from '../styles';
 
 /**
  * @description Render an inline error
+ * @return {JSX}
  */
 export function InlineError({ error, category }) {
   return (
@@ -29,5 +30,3 @@ InlineError.propTypes = {
   category: PropTypes.string.isRequired,
   error: PropTypes.any.isRequired,
 };
-
-export function ErrorAlert() {}

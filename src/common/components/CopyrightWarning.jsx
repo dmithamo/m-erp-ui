@@ -1,8 +1,12 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { colors } from '../styles';
 
+/**
+ * @description Copyright Notice component
+ * @return {JSX}
+ */
 export function CopyrightWarning() {
   return (
     <CopyrightWarningContainer>
@@ -18,10 +22,6 @@ export function CopyrightWarning() {
       </span>
     </CopyrightWarningContainer>
   );
-}
-
-export function Copyright() {
-  // To make if needed
 }
 
 const CopyrightWarningContainer = styled.div`

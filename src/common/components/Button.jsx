@@ -1,9 +1,14 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { colors } from '../styles';
 
+/**
+ * @description Generic Button Component
+ * @param {object} param0 Props
+ * @return {JSX}
+ */
 export default function Button({ type, isDisabled, children, onClick }) {
   return (
     <StyledBtn type={type} disabled={isDisabled} onClick={onClick}>
@@ -30,7 +35,7 @@ const StyledBtn = styled.button`
   color: ${colors.black};
   font: inherit;
   font-weight: bold;
-  height: 55px;
+  height: 45px;
   margin: 1rem 0;
   padding: 0.75em;
 

@@ -2,6 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import wip from '../common/assets/wip.svg';
 
+/**
+ * @description Placeholder component for wip views
+ * @return {JSX}
+ */
 export default function WIPTemp() {
   return (
     <WIPContainer>

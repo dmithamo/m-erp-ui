@@ -1,9 +1,14 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { colors } from '../styles';
 
+/**
+ * @description Generic input component
+ * @param {object} props
+ * @return {JSX}
+ */
 export default function Input(props) {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
@@ -17,12 +22,14 @@ export default function Input(props) {
   const {
     icon,
     required,
-    onChange,
     type,
     name,
     placeholder,
     value,
     error,
+    onChange,
+    onIconClick,
+    onKeyUp,
   } = props;
 
   return (
@@ -30,22 +37,25 @@ export default function Input(props) {
       <StyledLabel htmlFor={name}>{name}</StyledLabel>
 
       <InputContainer error={error}>
-        <IconContainer>
-          <FontAwesomeIcon icon={icon} />
-        </IconContainer>
+        {icon !== 'search' && (
+          <IconContainer>
+            <FontAwesomeIcon icon={icon} />
+          </IconContainer>
+        )}
 
         <StyledInput
           required={required}
           autoComplete="off"
-          onChange={onChange}
           type={type === 'password' && passwordVisible ? 'text' : type}
           name={name}
           id={name}
           placeholder={placeholder}
           value={value}
+          onChange={onChange}
+          onKeyUp={onKeyUp}
         />
 
-        {type === 'password' ? (
+        {type === 'password' && (
           <IconContainer>
             <TogglePasswordVisibilityBtn
               type="button"
@@ -59,21 +69,29 @@ export default function Input(props) {
               )}
             </TogglePasswordVisibilityBtn>
           </IconContainer>
-        ) : null}
+        )}
+
+        {icon === 'search' && (
+          <IconContainer onClick={onIconClick} style={{ cursor: 'pointer' }}>
+            <FontAwesomeIcon icon={icon} />
+          </IconContainer>
+        )}
       </InputContainer>
     </>
   );
 }
 
 Input.propTypes = {
-  onChange: PropTypes.func,
-  placeholder: PropTypes.string,
   type: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
-  error: PropTypes.any.isRequired,
-  required: PropTypes.bool.isRequired,
-  icon: PropTypes.any.isRequired,
+  onChange: PropTypes.func,
+  onIconClick: PropTypes.func,
+  onKeyUp: PropTypes.func,
+  placeholder: PropTypes.string,
+  name: PropTypes.string,
+  error: PropTypes.any,
+  required: PropTypes.bool,
+  icon: PropTypes.string,
 };
 
 /*
@@ -84,7 +102,13 @@ const doNothing = () => {};
 
 Input.defaultProps = {
   onChange: doNothing,
+  onIconClick: doNothing,
+  onKeyUp: doNothing,
   placeholder: '',
+  name: '',
+  error: false,
+  required: false,
+  icon: '',
 };
 
 const IconContainer = styled.p`
@@ -100,11 +124,10 @@ const InputContainer = styled.div`
     props.error
       ? '1px solid rgba(255, 0, 0, 0.8)'
       : '1px solid rgba(220, 220, 220, 0.8)'};
-  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.75em;
+  padding: 0.35em 0.5em;
 
   margin-bottom: 2.5em;
 

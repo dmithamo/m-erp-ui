@@ -31,6 +31,11 @@ const RestClient = {
   },
 };
 
+/**
+ * @description Placeholder auth function
+ * @param {object} params
+ * @return {object} res
+ */
 function loginUserDummy(params) {
   const okRes = {
     status: 200,

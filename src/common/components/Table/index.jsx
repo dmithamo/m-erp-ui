@@ -1,54 +1,107 @@
-import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import React, { Fragment, useState } from 'react';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
-import renderByType from './helpers/renderVal';
 import { colors } from '../../styles';
+import Search from '../Search';
+import renderByType from './helpers/renderVal';
 
-const Table = ({ stateName, columns, dataSource, actions }) => {
+/**
+ * @description Generic table
+ * @param {object} param0 Props
+ * @return {JSX}
+ */
+function Table({ stateName, columns, dataSource, actions }) {
   const keys = columns.map((col) => col.key);
+  const [dataToDisplay, setDataToDisplay] = useState(dataSource);
 
-  if (dataSource.length === 0) {
-    return <p>{`NO_${stateName.toUpperCase()}_FOUND`}</p>;
+  const [query, setQuery] = useState('');
+
+  /**
+   * @description Respond to input in search bar
+   * @param {KeyBoardEven} e
+   */
+  function onSearchInput(e) {
+    setQuery(e.target.value);
+    if (!e.target.value) {
+      onCancel();
+    }
+  }
+
+  /**
+   * @description Respond to input in search bar
+   */
+  function onSearch() {
+    setDataToDisplay(
+      query
+        ? dataSource.filter((item) => JSON.stringify(item).includes(query))
+        : dataSource,
+    );
+  }
+
+  /**
+   * @description Respond to cancellation of search
+   */
+  function onCancel() {
+    setQuery('');
+    setDataToDisplay(dataSource);
   }
 
   return (
-    <StyledTable>
-      <thead>
-        <tr>
-          {columns.map((col) => (
-            <StyledTableCell key={col.key}>{col.displayName}</StyledTableCell>
-          ))}
-          <StyledTableCell>Actions</StyledTableCell>
-        </tr>
-      </thead>
-      <tbody>
-        {dataSource.map((item) => (
-          <tr key={item.number}>
-            {keys.map((key) => (
-              <StyledTableCell key={key}>
-                <Fragment key={uuidv4()}>
-                  {renderByType(item[key], key)}
-                </Fragment>
-              </StyledTableCell>
-            ))}
-            <StyledTableCell>
-              {actions.map((action) => (
-                <StyledTableButton
-                  key={uuidv4()}
-                  type="button"
-                  onClick={() => action.onClick(item)}
-                >
-                  {action.value}
-                </StyledTableButton>
+    <TableWrapper>
+      <Search
+        onChange={onSearchInput}
+        query={query}
+        onSearch={onSearch}
+        onCancel={onCancel}
+        placeholder="Type to filter"
+      />
+      {dataToDisplay.length === 0 ? (
+        <>
+          Searching for requisition: {query}
+          <p>{`NO_${stateName.toUpperCase()}_FOUND`}</p>
+        </>
+      ) : (
+        <StyledTable>
+          <thead>
+            <tr>
+              {columns.map((col) => (
+                <StyledTableCell key={col.key}>
+                  {col.displayName}
+                </StyledTableCell>
               ))}
-            </StyledTableCell>
-          </tr>
-        ))}
-      </tbody>
-    </StyledTable>
+              <StyledTableCell>Actions</StyledTableCell>
+            </tr>
+          </thead>
+          <tbody>
+            {dataToDisplay.map((item) => (
+              <tr key={item.number}>
+                {keys.map((key) => (
+                  <StyledTableCell key={key}>
+                    <Fragment key={uuidv4()}>
+                      {renderByType(item[key], key)}
+                    </Fragment>
+                  </StyledTableCell>
+                ))}
+                <StyledTableCell>
+                  {actions.map((action) => (
+                    <StyledTableButton
+                      key={uuidv4()}
+                      type="button"
+                      onClick={() => action.onClick(item)}
+                    >
+                      {action.value}
+                    </StyledTableButton>
+                  ))}
+                </StyledTableCell>
+              </tr>
+            ))}
+          </tbody>
+        </StyledTable>
+      )}
+    </TableWrapper>
   );
-};
+}
 
 Table.propTypes = {
   stateName: PropTypes.string.isRequired,
@@ -57,9 +110,19 @@ Table.propTypes = {
   actions: PropTypes.array.isRequired,
 };
 
+const TableWrapper = styled.div`
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+`;
+
 const StyledTableCell = styled.td`
   padding: 1em;
-  border: 1px dashed ${colors.grey};
+  /* border: 1px dashed ${colors.grey}; */
 `;
 
 const StyledTable = styled.table`
@@ -87,6 +150,7 @@ const StyledTable = styled.table`
   padding: 1em;
   border-radius: 5px;
   border-collapse: collapse;
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2);
 `;
 
 const StyledTableButton = styled.button`

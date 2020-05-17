@@ -1,9 +1,14 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import Sidebar from '../../../features/sidebar';
 import { colors } from '../../styles';
 
+/**
+ * @description Layout for all dashboard views
+ * @param {object} param0 props
+ * @return {JSX}
+ */
 export function DashboardLayout({ children }) {
   return (
     <DashboardContainer>
@@ -13,6 +18,11 @@ export function DashboardLayout({ children }) {
   );
 }
 
+/**
+ * @description Layout for all front(auth) view
+ * @param {object} param0 props
+ * @return {JSX}
+ */
 export function FrontLayout({ children }) {
   return <FrontContainer>{children}</FrontContainer>;
 }
@@ -27,9 +37,11 @@ const DashboardContainer = styled.div`
   grid-template-columns: 1fr 7fr;
 
   div#children {
+    width: 100%;
+    padding: 0.5em 1.5em;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     margin: 0;
     background-color: ${colors.greyBackground};
   }

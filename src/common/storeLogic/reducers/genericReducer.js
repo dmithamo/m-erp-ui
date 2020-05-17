@@ -1,17 +1,18 @@
 import {
+  CLEAR_FORM_ERRORS,
+  FETCH_FAILURE,
   FETCH_REQUEST,
   FETCH_SUCCESS,
-  FETCH_FAILURE,
+  POST_FAILURE,
   POST_REQUEST,
   POST_SUCCESS,
-  POST_FAILURE,
-  CLEAR_FORM_ERRORS,
 } from '../actions';
 
 /**
  * @description Update state in response to an action
  * @param {object} prevState
- * @param {type, payload} action
+ * @param {object} action
+ * @return {object} state
  */
 export default function reducer(prevState = null, action) {
   const { type, payload } = action;

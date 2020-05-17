@@ -19,7 +19,8 @@ export const CLEAR_FORM_ERRORS = 'CLEAR_FORM_ERRORS';
 
 /**
  * @description Indicate that a GET request is in progress
- @param {string} stateName Slice of state that this action targets
+ * @param {string} stateName Slice of state that this action targets
+ * @return {object} action
  */
 export function initiateFetchRequest(stateName) {
   return { type: FETCH_REQUEST, stateName };
@@ -28,6 +29,7 @@ export function initiateFetchRequest(stateName) {
 /**
  * @description Indicate that a POST request is in progress
  * @param {string} stateName Slice of state that this action targets
+ * @return {object} action
  */
 export function initiatePostRequest(stateName) {
   return { type: POST_REQUEST, stateName };
@@ -37,6 +39,7 @@ export function initiatePostRequest(stateName) {
  * @description Load all fetched items into the store
  * @param {array} items
  * @param {string} stateName Slice of state that this action targets
+ * @return {object} action
  */
 export function fetchSuccess(items, stateName) {
   return { type: FETCH_SUCCESS, payload: items, stateName };
@@ -46,6 +49,7 @@ export function fetchSuccess(items, stateName) {
  * @description Add a GET err to the store
  * @param {object} err
  * @param {string} stateName Slice of state that this action targets
+ * @return {object} action
  */
 export function fetchFailure(err, stateName) {
   return { type: FETCH_FAILURE, payload: err, stateName };
@@ -55,6 +59,7 @@ export function fetchFailure(err, stateName) {
  * @description Load a newly minted item to the store
  * @param {object} item
  * @param {string} stateName Slice of state that this action targets
+ * @return {object} action
  */
 export function postSuccess(item, stateName) {
   return { type: POST_SUCCESS, payload: item, stateName };
@@ -64,6 +69,7 @@ export function postSuccess(item, stateName) {
  * @description Add a POST error to the store
  * @param {object} err
  * @param {string} stateName Slice of state that this action targets
+ * @return {object} action
  */
 export function postFailure(err, stateName) {
   return { type: POST_FAILURE, payload: err, stateName };
@@ -72,6 +78,7 @@ export function postFailure(err, stateName) {
 /**
  * @description Remove errors from store
  * @param {string} stateName Slice of state that this action targets
+ * @return {object} action
  */
 export function clearFormErrors(stateName) {
   return { type: CLEAR_FORM_ERRORS, stateName };
@@ -86,6 +93,9 @@ export function clearFormErrors(stateName) {
  * && dispatch appropriate actions to store depending on
  * API response
  * @param {string} stateName Slice of state that this action targets
+ * @param {string} path endpoint to target on server
+ * @param {object} params params needed
+ * @return {object} ?
  */
 export function fetchResources(stateName, path, params = null) {
   return async (dispatch) => {
@@ -116,7 +126,9 @@ export function fetchResources(stateName, path, params = null) {
  * && dispatch appropriate actions to store depending on
  * API response
  * @param {string} stateName Slice of state that this action targets
+ * @param {string} path
  * @param {object} resource
+ * @return {object} ?
  */
 export function createNewResource(stateName, path, resource) {
   return async (dispatch) => {
@@ -151,6 +163,7 @@ export function createNewResource(stateName, path, resource) {
  * @description Dispatch an error action to the store
  * @param {object} error
  * @param {string} stateName Slice of state that this action targets
+ * @return {object} ?
  */
 export function addError(error, stateName) {
   return (dispatch) => dispatch(postFailure(handleFormError(error), stateName));
@@ -159,6 +172,7 @@ export function addError(error, stateName) {
 /**
  * @description Dispatch an action to reset error to false
  * @param {string} stateName Slice of state that this action targets
+ * @return {object} ?
  */
 export function removeFormErrors(stateName) {
   return (dispatch) => dispatch(clearFormErrors(stateName));
@@ -168,6 +182,7 @@ export function removeFormErrors(stateName) {
  * @description Helper to determine what kind of err to report
  * after bad (NOT OK) API response
  * @param {object} error
+ * @return {object} ?
  */
 function handleApiError(error) {
   if (error.response && error.response.status === 404) {
@@ -185,6 +200,7 @@ function handleApiError(error) {
 /**
  * @description Determine error to report a validation failure
  * @param {object} error
+ * @return {object} error
  */
 function handleFormError(error) {
   return { ...error /* status: 400 <Bad Request> */ };

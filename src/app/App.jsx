@@ -1,32 +1,33 @@
-import React from 'react';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
-  faFingerprint,
-  faAt,
-  faEye,
-  faEyeSlash,
-  faIdCardAlt,
-  faSignOutAlt,
-  faCaretDown,
-  faHome,
-  faExclamationCircle,
-  faLink,
-  faThLarge,
-  faFileInvoice,
-  faReceipt,
-  faBusinessTime,
-  faTasks,
-  faHourglassStart,
-  faEllipsisV,
-  faEllipsisH,
-} from '@fortawesome/free-solid-svg-icons';
-import {
-  faCopyright,
-  faQuestionCircle,
   faBell,
   faCheckCircle,
+  faCopyright,
+  faQuestionCircle,
   faTimesCircle,
 } from '@fortawesome/free-regular-svg-icons';
+import {
+  faAt,
+  faBusinessTime,
+  faCaretDown,
+  faEllipsisH,
+  faEllipsisV,
+  faExclamationCircle,
+  faEye,
+  faEyeSlash,
+  faFileInvoice,
+  faFingerprint,
+  faHome,
+  faHourglassStart,
+  faIdCardAlt,
+  faLink,
+  faReceipt,
+  faSearch,
+  faSignOutAlt,
+  faTasks,
+  faThLarge,
+} from '@fortawesome/free-solid-svg-icons';
+import React from 'react';
 import Routes from '../features/Routes';
 
 library.add(
@@ -53,8 +54,13 @@ library.add(
   faCheckCircle,
   faEllipsisV,
   faEllipsisH,
+  faSearch,
 );
 
+/**
+ * @description Entry way into the application
+ * @return {JSX}
+ */
 export function App() {
   return <Routes />;
 }

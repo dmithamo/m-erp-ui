@@ -1,11 +1,12 @@
 import { combineReducers } from 'redux';
-import reducer from './genericReducer';
 import authReducer from '../../../features/auth/storeLogic/reducer';
+import reducer from './genericReducer';
 
 /**
  * @description Reuse reducer logic to update state to avoid code duplication
  * @param {function} genericReducer
  * @param {string} reducerName
+ * @return {Function} reducer
  */
 function createNamedReducer(genericReducer, reducerName) {
   return (prevState = null, action) => {

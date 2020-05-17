@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
+/**
+ * @description Generic Loader
+ * @return {JSX}
+ */
 export default function Loader() {
   return (
     <LoaderContainer>

@@ -1,14 +1,18 @@
-import React from 'react';
-import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useSelector, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import styled from 'styled-components';
 import RESOURCES from '../../common/constants/resources';
-import User from './AuthenticatedUser';
-import { logoutUser } from '../auth/storeLogic/actions';
 import { colors } from '../../common/styles';
+import { logoutUser } from '../auth/storeLogic/actions';
+import User from './AuthenticatedUser';
 
+/**
+ * @description Sidebar component
+ *@return {JSX}
+ */
 export default function Sidebar() {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -73,6 +77,11 @@ const StyledSidebar = styled.nav`
   }
 `;
 
+/**
+ * @description A sidebar item
+ * @param {object} param0 props
+ * @return {JSX}
+ */
 export function SidebarItem({ route: { path, resourceName, icon } }) {
   return (
     <StyledLink activeClassName="isActive" to={path}>

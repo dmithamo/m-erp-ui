@@ -1,13 +1,17 @@
-import React from 'react';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import React from 'react';
 import { useSelector } from 'react-redux';
-import NotFound from './NotFound';
-import { FrontLayout, DashboardLayout } from '../common/components/Layouts';
-import SignInForm from './auth/SignInForm';
-import RESOURCES from '../common/constants/resources';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { DashboardLayout, FrontLayout } from '../common/components/Layouts';
 import Loader from '../common/components/Loader';
+import RESOURCES from '../common/constants/resources';
+import SignInForm from './auth/SignInForm';
+import NotFound from './NotFound';
 
+/**
+ * @description The application's routes
+ * @return {JSX}
+ */
 export function Routes() {
   const { user, isPosting } = useSelector((state) => state.auth);
   return (
@@ -51,6 +55,11 @@ export function Routes() {
 }
 export default Routes;
 
+/**
+ * @description A route item
+ * @return {JSX}
+ * @param {object} props
+ */
 function RouteItem(props) {
   const {
     exact,

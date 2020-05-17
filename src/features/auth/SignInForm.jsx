@@ -3,19 +3,23 @@
  * Compose these into a Sign in AuthForm
  */
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { FormContainer, FormHeader } from './styles';
-import Input from '../../common/components/Input';
 import Button from '../../common/components/Button';
 import { InlineError } from '../../common/components/Error';
+import Input from '../../common/components/Input';
 import { isValidEmail } from '../../common/utils/validateInput';
 import {
-  loginUser,
-  clearFormErrors,
   addValidationError,
+  clearFormErrors,
+  loginUser,
 } from './storeLogic/actions';
+import { FormContainer, FormHeader } from './styles';
 
+/**
+ * @description Auth form
+ * @return {JSX}
+ */
 export default function SignInForm() {
   const { user, error } = useSelector((state) => state.auth);
   const dispatch = useDispatch();

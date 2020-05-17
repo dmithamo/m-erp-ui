@@ -8,6 +8,7 @@ const SECRET_KEY = process.env.REACT_APP_SECRET_KEY;
  * @description Encrypt value and save as a jwt with 8hr validity
  * period
  * @param {object} value
+ * @return {string} token
  */
 export function encryptValue(value) {
   if (!value) return;
@@ -32,6 +33,7 @@ export function encryptValue(value) {
 /**
  * @description Decrypt string
  * @param {string} value
+ * @return {object} decrypted value
  */
 export function decryptValue(value) {
   if (!value) return;

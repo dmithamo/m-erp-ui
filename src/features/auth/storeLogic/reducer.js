@@ -1,9 +1,9 @@
 import {
+  CLEAR_FORM_ERRORS,
   LOADING,
+  LOGIN_ERR,
   LOGIN_USER,
   LOGOUT_USER,
-  LOGIN_ERR,
-  CLEAR_FORM_ERRORS,
 } from './actions';
 
 export const initialAuthState = { isPosting: false, user: false, error: false };
@@ -12,6 +12,7 @@ export const initialAuthState = { isPosting: false, user: false, error: false };
  * @description Helper for updating state
  * @param {object} prevState
  * @param {object} newValues
+ * @return {object} state
  */
 function updateStateHelper(prevState, newValues) {
   return { ...prevState, ...newValues };
@@ -20,7 +21,8 @@ function updateStateHelper(prevState, newValues) {
 /**
  * @description Act on a given action to update the state accordingly
  * @param {object} state
- * @param {type, payload} action
+ * @param {object} action
+ * @return {object} state
  */
 export default function authReducer(state = initialAuthState, action) {
   const { type, payload } = action;
