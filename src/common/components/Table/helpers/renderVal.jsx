@@ -14,6 +14,13 @@ const renderByType = (value, key = '', desiredAttrs = []) => {
 
   if (key === 'approvals') return renderApproval(value);
 
+  if (key === 'amount') {
+    return new Intl.NumberFormat('en-KE', {
+      style: 'currency',
+      currency: 'Kes',
+    }).format(value);
+  }
+
   switch (value.constructor) {
     case Array:
       // some array.

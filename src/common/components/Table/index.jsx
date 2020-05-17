@@ -58,7 +58,7 @@ function Table({ stateName, columns, dataSource, actions }) {
       />
       {dataToDisplay.length === 0 ? (
         <>
-          Searching for requisition: {query}
+          Searching for {stateName}: {query}
           <p>{`NO_${stateName.toUpperCase()}_FOUND`}</p>
         </>
       ) : (
@@ -75,7 +75,7 @@ function Table({ stateName, columns, dataSource, actions }) {
           </thead>
           <tbody>
             {dataToDisplay.map((item) => (
-              <tr key={item.number}>
+              <tr key={item.id}>
                 {keys.map((key) => (
                   <StyledTableCell key={key}>
                     <Fragment key={uuidv4()}>

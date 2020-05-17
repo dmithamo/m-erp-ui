@@ -21,43 +21,47 @@ export default function Requisitions() {
   const history = useHistory();
 
   const columns = [
-    { key: 'number', displayName: '#', isFilterable: true, isSearchable: true },
     {
       key: 'short_id',
-      displayName: 'id',
+      displayName: '#',
       isFilterable: true,
-      isSearchable: true,
+      isSortable: true,
     },
+    {
+      key: 'createdAt',
+      displayName: 'Created',
+      isFilterable: true,
+      isSortable: true,
+    },
+    // {
+    //   key: 'updatedAt',
+    //   displayName: 'Updated',
+    //   isFilterable: true,
+    //   isSortable: true,
+    // },
     {
       key: 'title',
       displayName: 'summary',
       isFilterable: true,
-      isSearchable: true,
+      isSortable: true,
     },
     {
       key: 'amount',
-      displayName: 'amount (KES)',
+      displayName: 'amount',
       isFilterable: true,
-      isSearchable: true,
+      isSortable: true,
     },
     {
       key: 'approvals',
-      displayName: 'approvals',
+      displayName: 'Status',
       isFilterable: true,
-      isSearchable: true,
-    },
-    {
-      key: 'createdAt',
-      displayName: 'date created',
-      isFilterable: true,
-      isSearchable: true,
+      isSortable: true,
     },
   ];
 
   const dataSource = data.map((req) => ({
-    number: data.indexOf(req) + 1,
     id: req.id,
-    short_id: String(req.id).slice(0, 8),
+    short_id: String(req.id).slice(0),
     title: req.title,
     amount: req.amount,
     approvals: req.approvals
@@ -69,16 +73,23 @@ export default function Requisitions() {
         status: approval.status,
         createdAt: approval.createdAt,
       })),
-    createdAt: req.createdAt,
-    updatedAt: req.updatedAt,
+    createdAt: new Date(req.createdAt).toLocaleString('en-ke'),
+    updatedAt: new Date(req.updatedAt).toLocaleString('en-ke'),
   }));
 
   const actions = [
     {
       key: 'view',
-      value: 'Details',
+      value: 'View',
       onClick: (requisition) => {
-        history.push(`/manage/resources/requisitions/${requisition.id}/edit`);
+        history.push(`/requisitions/${requisition.id}/edit`);
+      },
+    },
+    {
+      key: 'archive',
+      value: 'archive',
+      onClick: (requisition) => {
+        console.log(requisition);
       },
     },
   ];

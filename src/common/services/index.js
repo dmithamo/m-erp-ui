@@ -18,8 +18,19 @@ const RestClient = {
     return api.post(path, params);
   },
 
-  get: (path) => {
-    if (path === '/requisitions') {
+  get: (path, params) => {
+    if (path.includes('requisitions')) {
+      if (params && params.id) {
+        return {
+          message: 'OK',
+          status: 200,
+          data: {
+            requisition: FAKE_DATA.requisitions.filter(
+              (rq) => rq.id === params.id,
+            )[0],
+          },
+        };
+      }
       return {
         message: 'OK',
         status: 200,

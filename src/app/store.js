@@ -29,7 +29,7 @@ function configureStore(reducerFn) {
   const INIT_STATE = {
     auth: initialAuthState,
     requisitions: GENERIC_INIT_STATE,
-    singleRequisition: GENERIC_INIT_STATE,
+    requisition: GENERIC_INIT_STATE,
   };
 
   return createStore(reducerFn, INIT_STATE, composedEnhancers);
